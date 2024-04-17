@@ -8,8 +8,6 @@ We have made a video showing the ux/ui we are aiming for: see [here](https://www
 
 ## Technical usage scenarios & Features
 
-*See "**[BB info for use cases (WP2)](https://docs.google.com/spreadsheets/d/1oKWCe0XqRJ1d-wZfKnFtZb2fS0NetFMEXX4OWSyiwDU/edit#gid=1137874968)**" spreadsheet.*
-
 **Key functionalities:**
 
 - Submit metadata edit proposal for a Learning object (LO) by an individual
@@ -89,8 +87,6 @@ Here is an example of how LOMCT is used by an employee of company:
 - He proposes changing this metadata to "novice". This way, people looking for an easy resource will find this video.
 
 ## Requirements
-
-*See the "**[Requirements spreadsheets](https://docs.google.com/spreadsheets/d/1a8vZe7JYD3zET0iejmYfiMATZGQOYjP27eDg3u7co-w/edit#gid=34673071)**".*
 
 | Requirement ID | Short description | BB input format | BB output format | Any other constraints | Verified by scenario | Requirement type |
 |---|---|---|---|---|---|---|
@@ -239,55 +235,37 @@ What?
 
 block-beta
 
-columns 3
+columns 6
+LearningObject:1 LOMCT_PDC:1 LOMCT:1 LOMCT_PDC_:1
 
-LearningObject:1 LOMCT:1
-
-block:group
-
+block:group1
 columns 1
-
-Connector
+CC_PDC DVA_PDC ET_PDC EC_PDC
+end
 
 block:group2
-
-columns 3
-
-Identity Consent Contract
-
+columns 1
+ConsentContracts DataVeracityAssurance EdgeTranslators EdgeComputing
 end
 
-ConsentContracts DataVeracityAssurance EdgeTranslators
-
-end
-
-space EdgeComputing:1
+space:2 LRS:1
 
 classDef colorA fill:#D22FF7,color:#fff
-
 classDef colorEx fill:#01D1D1,color:#fff
-
 classDef colorED fill:#6E7176,color:#fff
-
 class LearningObject colorEx
-
+class LRS colorEx
 class LOMCT colorED
-
 class EdgeComputing colorED
-
 class ConsentContracts colorED
-
 class DataVeracityAssurance colorED
-
 class EdgeTranslators colorED
-
-class Connector colorA
-
-class Identity colorA
-
-class Consent colorA
-
-class Contract colorA
+class LOMCT_PDC colorA
+class LOMCT_PDC_ colorA
+class EC_PDC colorA
+class CC_PDC colorA
+class ET_PDC colorA
+class DVA_PDC colorA
 
 ```
 
@@ -586,36 +564,47 @@ Here is the corresponding xAPI statement:
 ## Architecture
 ```mermaid
 classDiagram
-   LOMCT <|-- Connector
-   LOMCT <|-- Consent_Contracts
-   LOMCT <|-- Data_veracity_assurance
-   LOMCT <|-- EDGE_translator
-   Connector <|-- Identity
-   Connector <|-- Consent
-   Connector <|-- Contract
-   LOMCT: string review [4]
-   LOMCT: string metadata [14]
-   LOMCT: add_review()
-   LOMCT: edit_metadata()
-   LOMCT: send_lrs()
-   class Connector{
+   LOMCT <|-- LOMCT_PDC
+   LOMCT_PDC <|-- LOMCT
+   LOMCT_PDC <|-- CC_PDC
+   CC_PDC <|-- LOMCT_PDC
+   CC_PDC <|-- Consent_Contracts
+   Consent_Contracts <|-- CC_PDC
+   LOMCT_PDC <|-- DVA_PDC
+   DVA_PDC <|-- LOMCT_PDC
+   DVA_PDC <|-- Data_veracity_assurance
+   Data_veracity_assurance <|-- DVA_PDC
+   LOMCT_PDC <|-- ET_PDC
+   ET_PDC <|-- LOMCT_PDC
+   ET_PDC <|-- EDGE_translator
+   EDGE_translator <|-- ET_PDC
+   class LOMCT_PDC{
      identity()
-     consent()
+     catalog()
      contract()
+     consent()
+     other_core_BBs()
    }
-   class Consent{
-     bool consent
-     consent_sign()
+   class CC_PDC{
+     identity()
+     catalog()
+     contract()
+     consent()
+     other_core_BBs()
    }
-   class Identity{
-     String first name
-     String last name
-     String job
-     id()
+   class DVA_PDC{
+     identity()
+     catalog()
+     contract()
+     consent()
+     other_core_BBs()
    }
-   class Contract{
-     bool contract
-     contract_sign()
+   class ET_PDC{
+     identity()
+     catalog()
+     contract()
+     consent()
+     other_core_BBs()
    }
    class Consent_Contracts{
      bool week[7]
@@ -643,14 +632,14 @@ Behavior to display a resource :
 sequenceDiagram
    actor User as User
    User->>LOMCT: Open LOMCT extension
-   LOMCT->>Connector: Request for information on identity, consent and contract
-   Connector->>Identity: Request for identity information
-   Identity->>Connector: Provide identity information
-   Connector->>Consent: Request for consent information
+   LOMCT->>LOMCT_PDC: Request for information on identity, consent and contract
+   LOMCT_PDC->>Identity: Request for identity information
+   Identity->>LOMCT_PDC: Provide identity information
+   LOMCT_PDC->>Consent: Request for consent information
    Identity->>Consent: Provide consent information
-   Connector->>Contract: Request for contract information
-   Contract->>Connector: Provide contract information
-   Connector->>LOMCT: Identity, consent and contract sent and approved
+   LOMCT_PDC->>Contract: Request for contract information
+   Contract->>LOMCT_PDC: Provide contract information
+   LOMCT_PDC->>LOMCT: Identity, consent and contract sent and approved
    LOMCT->>Consent/Contract: Request profil consent of user
    Consent/Contract->>LOMCT: Provide profil consent of user
    LOMCT->>User: Display the extension
@@ -686,8 +675,6 @@ sequenceDiagram
 - enter LRS url and user credential in LOMCT settings
 
 ## Third Party Components & Licenses
-
-*See the "**[EDGE third party/background components](https://docs.google.com/spreadsheets/d/13Lf4PfVnA_lAk-7dMeIy0QRxHnarxMcsS8EaLjyOlBA/edit#gid=1385858520)**" spreadsheet.*
 
 External components and licenses:
 
@@ -727,10 +714,6 @@ paths: \
 *Test definitions and testing environment should be availaible, and the tests should be repeatable.*
 
 ### Test plan
-
-*Testing strategy, tools and methods chosen, methods for acceptance criteria.*
-
-*[To be detailed](https://drive.google.com/drive/folders/1gId01K0uelxkqrO0yAgiysT3jrTi5foj).*
 
 Before putting the V0 into the hands of users, we need to ensure that the LOMCT works under several conditions. Perform these tests for each type of resource (from wikipedia, youtube and amazon):
 

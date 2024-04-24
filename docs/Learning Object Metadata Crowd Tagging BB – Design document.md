@@ -636,7 +636,7 @@ sequenceDiagram
    LOMCT_PDC->>Identity: Request for identity information
    Identity->>LOMCT_PDC: Provide identity information
    LOMCT_PDC->>Consent: Request for consent information
-   Identity->>Consent: Provide consent information
+   Consent->>LOMCT_PDC: Provide consent information
    LOMCT_PDC->>Contract: Request for contract information
    Contract->>LOMCT_PDC: Provide contract information
    LOMCT_PDC->>LOMCT: Identity, consent and contract sent and approved

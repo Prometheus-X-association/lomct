@@ -4,7 +4,8 @@ Learning Object Metadata Crowd Tagging is a method for tagging and reviewing dig
 
 The LOMCT is a data service (browser extension) which facilitates the collection of feedback from teachers about LO (metadata, reviews). The LO index is a data source (LRS) for organizations which want to store metadata and reviews of LO submitted by their teachers or course designers.
 
-We have made a video showing the ux/ui we are aiming for: see [here](https://www.figma.com/proto/00bhtj9Bmaw9GZRQQUbolt/Untitled?type=design&node-id=187-339&t=C3bH2XPqLpe537IM-0&scaling=min-zoom&page-id=187%3A279) 
+Please note that the following visuals are intended as projections only. UX/UI work will be carried out later in the process.
+![Enter image alt description](Images/EWJ_Image_1.jpeg)
 
 ## Technical usage scenarios & Features
 
@@ -90,10 +91,10 @@ Here is an example of how LOMCT is used by an employee of company:
 
 | Requirement ID | Short description | BB input format | BB output format | Any other constraints | Verified by scenario | Requirement type |
 |---|---|---|---|---|---|---|
-| BB-REQ_ID__1 | LOMCT must request building block consent via the ARIANE connector | API call | API response |  |  |  |
+| BB-REQ_ID__1 | LOMCT must request building block consent via the Prometheus-X Dataspace Connector | API call | API response |  |  |  |
 | BB-REQ_ID__1.1 | Individuals must consent to the use of their data in LOMCT | API call | API response | If the answer is no, the data cannot be used, nor transferred into or from the PLRS. If the answer is yer, the data can be used, and transferred into or from the PLRS. | BB-SC-LOMCT-01 | DEP |
 | BB-REQ_ID__1.2 | Consent must be asked and verified in less than 30s | API call | API response |  | BB-SC-LOMCT-02 | PERF |
-| BB-REQ_ID__2 | LOMCT must request contracts from the building block consent via the ARIANE connector | API call | API response |  |  |  |
+| BB-REQ_ID__2 | LOMCT must request contracts from the building block consent via the Prometheus-X Dataspace Connector | API call | API response |  |  |  |
 | BB-REQ_ID__2.1 | The LOMCT must check with the contract manager through the Dataspace connector if a contract for the corresponding organization exists | API call | API response | If the answer is no, the data cannot be accessed, nor transferred into or from the PLRS. If the answer is yer, the data can be accessed, and transferred into or from the PLRS. | BB-SC-LOMCT-03 | DEP |
 | BB-REQ_ID__2.2 | Contract must be asked and verified in less than 30s | API call | API response |  | BB-SC-LOMCT-04 | PERF |
 | BB-REQ_ID__3 | LOMCT must connect with BB Consent/contracts negotiating agent (EDGE-Skill) |  |  |  |  |  |
@@ -266,8 +267,8 @@ class EC_PDC colorA
 class CC_PDC colorA
 class ET_PDC colorA
 class DVA_PDC colorA
-
 ```
+PDC : Prometheus-X Dataspace Connector
 
 ## Input / Output Data
 
@@ -583,28 +584,24 @@ classDiagram
      catalog()
      contract()
      consent()
-     other_core_BBs()
    }
    class CC_PDC{
      identity()
      catalog()
      contract()
      consent()
-     other_core_BBs()
    }
    class DVA_PDC{
      identity()
      catalog()
      contract()
      consent()
-     other_core_BBs()
    }
    class ET_PDC{
      identity()
      catalog()
      contract()
      consent()
-     other_core_BBs()
    }
    class Consent_Contracts{
      bool week[7]
@@ -623,7 +620,7 @@ classDiagram
      add_lo_keyword()
    }
 ```
-
+PDC : Prometheus-X Dataspace Connector
 
 
 Dynamic Behaviour
@@ -632,22 +629,23 @@ Behavior to display a resource :
 sequenceDiagram
    actor User as User
    User->>LOMCT: Open LOMCT extension
-   LOMCT->>LOMCT_PDC: Request for information on identity, consent and contract
-   LOMCT_PDC->>Identity: Request for identity information
-   Identity->>LOMCT_PDC: Provide identity information
-   LOMCT_PDC->>Consent: Request for consent information
-   Consent->>LOMCT_PDC: Provide consent information
-   LOMCT_PDC->>Contract: Request for contract information
-   Contract->>LOMCT_PDC: Provide contract information
-   LOMCT_PDC->>LOMCT: Identity, consent and contract sent and approved
-   LOMCT->>Consent/Contract: Request profil consent of user
-   Consent/Contract->>LOMCT: Provide profil consent of user
-   LOMCT->>User: Display the extension
-   User->>LOMCT: select resource URL
-   LOMCT->>LRS: Request metadata related to the resource
-   LRS->>LOMCT: Provide metadata
-   LOMCT->>User: Display first metadata
+   LOMCT->>LOMCT_PDC: Validation request for LO metadata display
+   LOMCT_PDC->>Data_intermediary: Request for information on identity, consent and contract
+   Data_intermediary->>Identity: Request for identity information
+   Identity->>Data_intermediary: Provide identity information
+   Data_intermediary->>Consent: Request for consent information
+   Consent->>Data_intermediary: Provide consent information
+   Data_intermediary->>Contract: Request for contract information
+   Contract->>Data_intermediary: Provide contract information
+   Data_intermediary->>LOMCT_PDC: Identity, consent and contract sent and approved
+   LOMCT_PDC->>Consent/Contract: Request profil consent of user
+   Consent/Contract->>LOMCT_PDC: Provide profil consent of user
+   LOMCT_PDC->>LOMCT: Validation for LO metadata display
+   LOMCT->>LRS: Request LO metadata
+   LRS->>LOMCT: Send LO metadata
+   LOMCT->>User: Display the extension with metadata
 ```
+PDC : Prometheus-X Dataspace Connector
 
 Behavior to edit the metadata of a resource (the identification, consent and contract steps have already been completed when the extension is displayed) :
 ```mermaid
@@ -715,23 +713,9 @@ paths: \
 
 ### Test plan
 
-Before putting the V0 into the hands of users, we need to ensure that the LOMCT works under several conditions. Perform these tests for each type of resource (from wikipedia, youtube and amazon):
+Once the architecture has been defined, precise endpoint mockups will be developed. This will enable interaction with sample data.
 
-- Resource in the Inokufu database, with tags and reviews
-
-- Resource in the Inokufu database, with tags but no reviews
-
-- Resource in Inokufu database, without tags but with reviews
-
-- Resource in the Inokufu database, with no tags and no reviews
-
-- Resource not in the Inokufu database, with tags and reviews
-
-- Resource not in the Inokufu database, with tags but no reviews
-
-- Resource not in Inokufu database, without tags but with reviews
-
-- Resource not in the Inokufu database, with no tags and no reviews
+*To be detailed.*
 
 ### Unit tests
 
@@ -749,6 +733,20 @@ Before putting the V0 into the hands of users, we need to ensure that the LOMCT 
 
 ### UI test (where relevant)
 
-*Candidates for tools that can be used to implement the test cases: Selenium* 
+Please note that the following visuals are intended as projections only. UX/UI work will be carried out later in the process.
 
 ![Enter image alt description](Images/EWJ_Image_1.jpeg)
+
+## Partners & roles
+Inokufu (BB leader): 
+- Organize workshops
+- Monitor partner progress
+- Develop backend of LOMCT
+- Develop frontend of LOMCT
+
+edtake
+- test the extension
+
+## Usage in the dataspace
+The LOMCT will be used in the service chain :
+- Decentralized AI training: Training of trustworthy AI models

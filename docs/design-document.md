@@ -752,7 +752,7 @@ The LOMCT will be used as a potential source of data for a LRS and thus be part 
 
 - Personal learning record: Sharing LMS/Moodle Data for Visualization
   
-![Enter image alt description](BB%20Service%20chains%20_%20LRS%20Learning%20Records%20store.pptx%20(3).png)
+![Diagram of service chain Sharing LMS/Moodle Data for Visualization](BB%20Service%20chains%20_%20LRS%20Learning%20Records%20store.pptx%20(3).png) 
 PDC: Prometheus-X Dataspace Connector
 
 - Decentralized AI training: Training of trustworthy AI models

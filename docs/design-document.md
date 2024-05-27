@@ -738,13 +738,13 @@ Please note that the following visuals are intended as projections only. UX/UI w
 ![Enter image alt description](Images/EWJ_Image_1.jpeg)
 
 ## Partners & roles
-Inokufu (BB leader): 
+[Inokufu](https://www.inokufu.com/) (BB leader): 
 - Organize workshops
 - Monitor partner progress
 - Develop backend of LOMCT
 - Develop frontend of LOMCT
 
-edtake
+[edtake](https://www.edtake.com/)
 - test the extension
 
 ## Usage in the dataspace

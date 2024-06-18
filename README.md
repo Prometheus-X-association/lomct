@@ -1,3 +1,3 @@
 # Learning Object Metadata Crowd Tagging BB
 
-See the documentation [here](docs/).
+See the design document [here](docs/design-document.md).

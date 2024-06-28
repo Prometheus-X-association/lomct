@@ -751,9 +751,276 @@ Please note that the following visuals are intended as projections only. UX/UI w
 The LOMCT will be used as a potential source of data for a LRS and thus be part of the service chains:
 
 - Personal learning record: Sharing LMS/Moodle Data for Visualization
+
   
 ![Diagram of service chain Sharing LMS/Moodle Data for Visualization](Images/BB%20Service%20chains%20_%20LRS%20Learning%20Records%20store.pptx%20(3).png)
 PDC : Prometheus-X Dataspace Connector
 
 - Decentralized AI training: Training of trustworthy AI models
 
+  # Configuration and deployment settings
+
+## Error scenarios defined
+
+The idea of the risk table is to define the probable causes of failure in order to estimate the probability of encountering this failure, to evaluate its secondary effects and therefore to plan preventive or corrective actions.
+
+We will assign 3 scores on a scale of 1 to 10 to potential failures:
+- detection (risk of non-detection)
+- occurrence (probable occurrence, frequency of occurrence)
+- severity of effect (consequences for the customer)
+
+Criticality is calculated as follows:
+`criticality = detection x occurrence x severity`
+
+If criticality is greater than 10, then preventive action must be taken. If not, no.
+| ID  | Function involved                                                                                     | Description of risk                                             | Effect of failure                                                                                       | Cause of failure                                                                                      | Evaluation - Detection | Evaluation - Occurrence | Evaluation - Severity | Evaluation - Criticality | Preventive actions                                                                                                                                                                    |
+| --- | ------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- | ---------------------- | ----------------------- | --------------------- | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | Submit metadata edit proposal and write a review of a Learning object (LO) by an individual           | Data may be lost during migration                              | The organization doesn't receive the complete statements about the reviews or the metadata edit proposals. | Incorrect connection between LOMCT and LRS                                                            | 2                      | 2                       | 7                     | 28                       | Set up recurring connection tests                                                                                                                                                      |
+| 3   |                                                                                                        | Data could be transmitted to other non-targeted LRSs           | Exported data may be accessible to unauthorized persons                                                 | They are not properly secured                                                                         | 6                      | 1                       | 9                     | 54                       | Set up recurring connection tests<br>Test the cloud service's scalability                                                                                                             |
+| 4   |                                                                                                        | The LRS doesn't have enough storage space for all statements    | No more statement import                                                                               | Too little storage                                                                                  | 1                      | 3                       | 9                     | 24                       | Test the cloud service's scalability<br>Can be connected to BB Data veracity assurance (EDGE-Skill)                                                                                 |
+| 5   |                                                                                                        | The system may require downtime for large imports/exports       | Disrupting normal operations                                                                           | Low-performance servers                                                                             | 1                      | 3                       | 4                     | 12                       | Test the cloud service's scalability<br>Send statement to various LRS                                                                                                               |
+| 6   |                                                                                                        | User posts vulgar or insulting words                            | Unnecessary comment                                                                                    | Space for expression                                                                                | 1                      | 2                       | 6                     | 12                       | All these data are stored locally in the user browser/desktop.<br>A unique user id must be associated with the user for each LRS he is connected to.                                    |
+| 7   |                                                                                                        | The user is linked to several schools                          | Connection required with several LRS                                                                   | Implementation                                                                                      | 3                      | 5                       | 2                     | 10                       | The data proposed by the user is not posted as truthful but in a space that states that it is an editing proposal<br>optimize extension                                               |
+| 8   |                                                                                                        | Personal information is sent to LRS                             | Non-compliance with RGPD                                                                               | Implementation                                                                                      | 4                      | 2                       | 9                     | 54                       | Conduct pre-development workshops to ascertain user requirements                                                                                                                    |
+| 9   | **Visualize all metadata edit proposals and reviews associated to a LO**                              | The user proposes a false edition                               | False metadata                                                                                         | Space for expression                                                                                | 1                      | 3                       | 7                     | 84                       | Conduct pre-development workshops to ascertain user requirements and use accessibility tools                                                                                      |
+| 10  |                                                                                                        | Metadatas don't update                                          | Poor visualization of the metadata                                                                     | Slow update due to servers                                                                           | 4                      | 3                       | 8                     | 16                       | Only the most recent statement from the primary LRS is visible.                                                                                                                     |
+| 11  |                                                                                                        | Inadequate user interface                                       | No use of the platform                                                                                 | UI design is misleading                                                                              | 4                      | 9                       | 8                     | 96                       | Display metadata (information section) of primary link and mix reviews (reviews section)                                                                                            |
+| 12  |                                                                                                        | Wrong design choices: colors, shapes, ...                        | No use of the platform                                                                                 | Visual choices such as colors and graphics can subliminally influence the perception of data. Graphs are non-inclusive | 1                      | 7                       | 5                     | 96                       | Display the author's most recent review and ignore the others                                                                                                                         |
+| 13  |                                                                                                        | Identical statements in the same or several LRS                  | Duplicated information                                                                                 | Several sources of LRS                                                                               | 1                      | 7                       | 5                     | 45                       | All statements are displayed chronologically                                                                                                                                          |
+| 14  |                                                                                                        | The user is linked to several organizations                     | Too much information on the front page, information conflict                                           | Implementation                                                                                      | 1                      | 7                       | 5                     | 35                       | Display the organization's most recent statement and ignore the others                                                                                                               |
+| 15  |                                                                                                        | Several reviews from the same author are detected                | Obsolete reviews visible                                                                               | Implementation                                                                                      | 2                      | 7                       | 6                     | 35                       |                                                                                                                                                                                        |
+| 16  |                                                                                                        | Several metadata edit proposal from the same author are detected (simple user) | Metadata in several statements                                                                   | Implementation                                                                                      | 2                      | 7                       | 6                     | 84                       |                                                                                                                                                                                        |
+| 17  | **Submit metadata edit proposal and write a review of a Learning object (LO) by the organization**    | The organization may decide to change its LRS                   | Complication in determining the source of truth                                                         | Change of LRS                                                                                        | 1                      | 2                       | 1                     | 2                        |                                                                                                                                                                                        |
+| 18  |                                                                                                        | The organization's statements are not differentiated from others | Reconnecting the LOMCT and the new LRS                                                                | Implementation                                                                                      | 5                      | 5                       | 5                     | 125                      |                                                                                                                                                                                        |
+| 19  | Other                                                                                                  | Content Fragmentation                                           | No valorization of the organization's statements                                                        | The same LO is available on multiple sites and platforms with different URLs.                         | 1                      | 7                       | 5                     | 35                       | Assign a Global Unique Identifier (GUID) to each LO.                                                                                                                                  |
+| 19  |                                                                                                        | (an LO can have several redirect URLs)                           | This causes the information and reviews of the material to be fragmented                                |                                                                                                    |                        |                         |                       |                          |                                                                                                                                                                                        |
+# Test specification
+
+The Learning Object Metadata Crowd Tagging tests ensure that:
+- functionality is efficient
+- potential risks are under control
+- users are satisfied
+
+## Test plan
+
+The LOMCT testing strategy will focus on ensuring the accuracy, reliability, and performance of its functionality. We will use a combination of unit testing, integration testing, and user interface testing. The test environment will reproduce conditions similar to those in production in order to accurately validate BB behavior. Acceptance criteria will be defined based on user stories, functional requirements, and performance criteria.
+
+## Methodology
+
+We will run manual and automatic tests.
+
+### Manual Scenario
+
+Using the personas, user stories, user flow, and data flow from the Wiki LOM use case, we established several test scenarios.
+
+#### Persona 1: mmegauss (1 LRS)
+**First time install with 1 LRS**
+- Onboarding:
+  - Enter username: "mmegauss"
+  - Write bio: "Professeur de linguistique au M2 Sciences Po Paris"
+  - Connect one LRS: "https://XXX.com/data/xAPI"
+  - Accept the checkbox for visibility of username and biography.
+
+**Validation:**
+- Account creation with locally stored information.
+
+#### Persona 2: mcgonagall (2 LRS)
+**First time install with 2 LRSs**
+- Onboarding:
+  - Enter username: "mcgonagall"
+  - Write bio: "Management professor at Cambridge University"
+  - Connect primary LRS: "https://XXX.com/data/xAPIx"
+  - Accept the checkbox for visibility of username and biography.
+  - Continue to settings extension page.
+  - Connect secondary LRS: "https://XXX2.com/data/xAPIx"
+
+**Validation:**
+- Account creation with locally stored information.
+
+#### Persona 3: the authority
+**First install of authority**
+- Onboarding:
+  - Enter username: "French School Business"
+  - Write bio: "French School Business: Lyon"
+  - Connect primary LRS: "https://XXX.com/data/xAPIx"
+  - Accept the checkbox for visibility of username and biography.
+
+**Validation:**
+- Account creation with locally stored information.
+
+### Test scenarios
+
+#### Test scenario 1
+
+**mmegauss (persona 1) writes a review:**
+- Learning Object: [https://www.youtube.com/watch?v=hLE-5ElGlPM](https://www.youtube.com/watch?v=hLE-5ElGlPM)
+- Review:
+  - Rating: 5/5
+  - Comment: “Fantastic video for every history student in the Bachelor of Medieval History.”
+
+**Validation:**
+- Statement visible on connected LRS.
+- Review displayed in the reviews section.
+
+#### Test scenario 2
+
+**mmegauss (persona 1) writes a review:**
+- Learning Object: [https://en.wikipedia.org/wiki/Technology_readiness_level](https://en.wikipedia.org/wiki/Technology_readiness_level)
+- Review:
+  - Rating: 2/5
+  - Comment: “The level is subjective.”
+
+**Validation:**
+- Statement visible on connected LRS.
+- Review displayed in the reviews section of the correct learning object.
+
+#### Test scenario 3
+
+**mcgonagall (persona 2) writes a review:**
+- Learning Object: [https://www.youtube.com/watch?v=daM8YfBTNAg](https://www.youtube.com/watch?v=daM8YfBTNAg)
+- Review:
+  - Rating: 4/5
+  - Comment: “Good podcast to understand the Second World War.”
+
+**Validation:**
+- Statement visible on both connected LRSs.
+- Review displayed only once in the reviews list.
+
+#### Test scenario 4
+
+**mmegauss (persona 1) submits a metadata edit proposal:**
+- Learning Object: [https://www.youtube.com/watch?v=daM8YfBTNAg](https://www.youtube.com/watch?v=daM8YfBTNAg)
+- Proposal:
+  - Change type to podcast.
+  - Title: History through time
+  - License: [https://www.gnu.org/licenses/quick-guide-gplv3.en.html](https://www.gnu.org/licenses/quick-guide-gplv3.en.html)
+  - Provider: Youtube
+
+**Validation:**
+- Proposal visible on LRS.
+- Displayed in "Suggested Edits" section in the "information" extension.
+
+#### Test scenario 5
+
+**mmegauss (persona 1) submits a metadata edit proposal:**
+- Learning Object: [https://en.wikipedia.org/wiki/Pythagorean_theorem](https://en.wikipedia.org/wiki/Pythagorean_theorem)
+- Proposal:
+  - Change type to article.
+  - Title: Pythagorean theorem
+  - Provider: Wikipedia
+  - Bloom: discover
+
+**Validation:**
+- Proposal visible on LRS.
+- Displayed in "Suggested Edits" sections in "Home" and "information" extensions.
+
+#### Test scenario 6
+
+**mcgonagall (persona 2) submits a metadata proposal:**
+- Learning Object: Quelle différence entre l'anglais américain et britannique ? Quel accent choisir : UK ou US ?
+- Proposal:
+  - Type: Video
+  - Bloom: understand
+  - Title: Quelle différence entre l'anglais américain et britannique ? Quel accent choisir : UK ou US ?
+  - Provider: Youtube
+  - Language: French
+  - Keywords: 'BritishVsAmerican'
+
+**Validation:**
+- Proposal visible on both connected LRSs.
+- Displayed only once in "Suggested Edits" section in "information" extension.
+
+#### Test scenario 7
+
+**The authority (Persona 3) submits metadata edit proposals:**
+- Learning Object: What caused the French Revolution? - Tom Mullaney
+- Proposals:
+  1. Type: Podcast
+     - Bloom: describe compare
+     - Level: expert
+     - Title: History through time
+     - License: [https://www.gnu.org/licenses/quick-guide-gplv3.en.html](https://www.gnu.org/licenses/quick-guide-gplv3.en.html)
+     - Provider: Youtube
+     - Language: English
+     - Duration: 5:38 minutes
+     - Author: Tom Mullaney
+
+  2. Type: Video
+     - Title: what caused the French Revolution?
+     - Level: novice
+     - Provider: Youtube
+     - Language: English
+
+**Validation:**
+- Statements visible on authority's LRS.
+- Only the statement published on March 5 displayed in "information" section.
+
+#### Test scenario 8
+
+**mmegauss (persona 1) writes a review on a previously reviewed learning object:**
+- Learning Object: Langage Langue Parole (selon De Saussure) - Ma Langue dans Ta Poche #1
+- Previous review:
+  - Date: 07-12-2017
+  - Rating: 3/5
+  - Comment: “La vidéo n'est pas pertinente par rapport à l'ouvrage de l'auteur.”
+- Subsequent review:
+  - Date: 04-05-2020
+  - Rating: 4/5
+  - Comment: “C'est une vidéo dynamique pour introduire la pensée de Saussure aux étudiants de licence.”
+
+**Validation:**
+- Both statements visible on LRS.
+- Only the newest review displayed in reviews list.
+
+#### Test scenario 9
+
+**mcgonagall (persona 2) writes a review on a previously reviewed learning object:**
+- Learning Object: [https://hbr.org/2016/05/embracing-agile](https://hbr.org/2016/05/embracing-agile)
+- Previous review:
+  - Date: 01-04-2022
+  - Rating: 5/5
+  - Comment: “Interesting Article for Educational Use with First-Year College Students”
+- Subsequent review:
+  - Date: 06-07-2023
+  - Rating: 4/5
+  - Comment: “The article is still useful, but it needs an update.”
+
+**Validation:**
+- All statements visible on both connected LRSs.
+- Only the newest review displayed in the reviews list.
+
+#### Test scenario 10
+
+**mmegauss (persona 1) submits several metadata edit proposals:**
+- Learning Object: [https://en.wikipedia.org/wiki/President_of_the_United_States](https://en.wikipedia.org/wiki/President_of_the_United_States)
+- Proposals:
+  1. Change type to podcast.
+     - Title: President
+     - Provider: Youtube
+
+  2. Type: article
+     - Title: President of the united States
+     - Provider: Wikipedia
+
+**Validation:**
+- Both statements visible on LRS.
+- Displayed in "Suggested edits" section chronologically.
+
+### Automatic tests
+
+#### Auto1: Transfer test
+
+**Automatic transfer of learning statements once a week.**
+
+**Validation:**
+- Statements visible on LRS.
+
+#### Auto2: Scalability test
+
+**Automatic transfer of learning statements:**
+- 1 time per week
+- 1 time per day
+- 2 times per day
+
+**Validation:**
+- Statements visible on LRS.

@@ -5,7 +5,8 @@ Learning Object Metadata Crowd Tagging is a method for tagging and reviewing dig
 The LOMCT is a data service (browser extension) which facilitates the collection of feedback from teachers about LO (metadata, reviews). The LO index is a data source (LRS) for organizations which want to store metadata and reviews of LO submitted by their teachers or course designers.
 
 Please note that the following visuals are intended as projections only. UX/UI work will be carried out later in the process.
-![Enter image alt description](Images/EWJ_Image_1.jpeg)
+![LOMCT1](https://github.com/Prometheus-X-association/lomct/assets/129832540/7d6ad2db-f8bc-4010-b1bd-0fb738e1e4b3)
+
 
 ## Technical usage scenarios & Features
 
@@ -29,7 +30,7 @@ Please note that the following visuals are intended as projections only. UX/UI w
 
 **Features**: 
 
-- Submit metadata edit proposal of a Learning object (LO) by an individual \
+- **Submit metadata edit proposal of a Learning object (LO) by an individual** \
 Each Learning Object (video, article, podcast, …) is described by metadata: title, description, category, type, level, etc. Sometimes the metadata is wrong or missing. With LOMCT, each user can submit a metadata edit proposal. \
 	Path: \
 		- "The individual is confronted with a resource that has few or incorrect metadata" \
@@ -39,7 +40,7 @@ Each Learning Object (video, article, podcast, …) is described by metadata: ti
 		- "The individual submits his metadata edit proposal" \
 		- "LOMCT send the metadata edit proposal to the LO index (LRS), formatted as xAPI statement"
 
-- Write a review of a LO by an individual \
+- **Write a review of a LO by an individual** \
 The same Learning Object can be seen as relevant or not depending on the teacher point of view, his targeted learning outcome, his habits, etc. With LOMCT, each user can write his own review of the LO and explain why he finds it relevant or not for his needs.  \
 	Path:  \
 		- "The individual is confronted with a resource that he wants to add a review" \
@@ -49,12 +50,12 @@ The same Learning Object can be seen as relevant or not depending on the teacher
 		- "The individual submits his review" \
 		- "LOMCT send the review to the LO index (LRS), formatted as xAPI statement"
 
-- Visualize all metadata edit proposals and reviews associated to a LO \
+- **Visualize all metadata edit proposals and reviews associated to a LO** \
 Thanks to LOMCT, many metadata edit proposals and reviews will be collected for each LO. All these data are stored as xAPI statements in a LRS. With LOMCT, each user can see all the metadata edit proposals and reviews associated with a LO, made by all others users connected to the same LRS.  \
 	Path:  \
 		- "Individual enters the url of the LO to edit" \
 		- "LOMCT send request to LO index (LRS)" \
-		- "LOMCT also shows edit proposals and reviews linked to this LO" \
+		- "LOMCT also shows metadata edit proposals and reviews linked to this LO" \
 		- "Authors of the metadata edit proposals and reviews are shown with username and bio (job/area of expertise)"
 
 ### Technical usage scenarios
@@ -237,7 +238,7 @@ What?
 block-beta
 
 columns 6
-LearningObject:1 LOMCT_PDC:1 LOMCT:1 LOMCT_PDC_:1
+LearningObject:1 LOMCT:1 LRS:1 LRS_PDC:1
 
 block:group1
 columns 1
@@ -249,8 +250,6 @@ columns 1
 ConsentContracts DataVeracityAssurance EdgeTranslators EdgeComputing
 end
 
-space:2 LRS:1
-
 classDef colorA fill:#D22FF7,color:#fff
 classDef colorEx fill:#01D1D1,color:#fff
 classDef colorED fill:#6E7176,color:#fff
@@ -261,8 +260,7 @@ class EdgeComputing colorED
 class ConsentContracts colorED
 class DataVeracityAssurance colorED
 class EdgeTranslators colorED
-class LOMCT_PDC colorA
-class LOMCT_PDC_ colorA
+class LRS_PDC colorA
 class EC_PDC colorA
 class CC_PDC colorA
 class ET_PDC colorA
@@ -565,21 +563,22 @@ Here is the corresponding xAPI statement:
 ## Architecture
 ```mermaid
 classDiagram
-   LOMCT <|-- LOMCT_PDC
-   LOMCT_PDC <|-- LOMCT
-   LOMCT_PDC <|-- CC_PDC
-   CC_PDC <|-- LOMCT_PDC
+   LOMCT <|-- LRS
+   LRS <|-- LRS_PDC
+   LRS_PDC <|-- LRS
+   LRS_PDC <|-- CC_PDC
+   CC_PDC <|-- LRS_PDC
    CC_PDC <|-- Consent_Contracts
    Consent_Contracts <|-- CC_PDC
-   LOMCT_PDC <|-- DVA_PDC
-   DVA_PDC <|-- LOMCT_PDC
+   LRS_PDC <|-- DVA_PDC
+   DVA_PDC <|-- LRS_PDC
    DVA_PDC <|-- Data_veracity_assurance
    Data_veracity_assurance <|-- DVA_PDC
-   LOMCT_PDC <|-- ET_PDC
-   ET_PDC <|-- LOMCT_PDC
+   LRS_PDC <|-- ET_PDC
+   ET_PDC <|-- LRS_PDC
    ET_PDC <|-- EDGE_translator
    EDGE_translator <|-- ET_PDC
-   class LOMCT_PDC{
+   class LRS_PDC{
      identity()
      catalog()
      contract()
@@ -629,18 +628,6 @@ Behavior to display a resource :
 sequenceDiagram
    actor User as User
    User->>LOMCT: Open LOMCT extension
-   LOMCT->>LOMCT_PDC: Validation request for LO metadata display
-   LOMCT_PDC->>Data_intermediary: Request for information on identity, consent and contract
-   Data_intermediary->>Identity: Request for identity information
-   Identity->>Data_intermediary: Provide identity information
-   Data_intermediary->>Consent: Request for consent information
-   Consent->>Data_intermediary: Provide consent information
-   Data_intermediary->>Contract: Request for contract information
-   Contract->>Data_intermediary: Provide contract information
-   Data_intermediary->>LOMCT_PDC: Identity, consent and contract sent and approved
-   LOMCT_PDC->>Consent/Contract: Request profil consent of user
-   Consent/Contract->>LOMCT_PDC: Provide profil consent of user
-   LOMCT_PDC->>LOMCT: Validation for LO metadata display
    LOMCT->>LRS: Request LO metadata
    LRS->>LOMCT: Send LO metadata
    LOMCT->>User: Display the extension with metadata
@@ -654,10 +641,6 @@ sequenceDiagram
    User->>LOMCT: Select modification of resource metadata
    LOMCT->>User: Display editing form
    User->>LOMCT: Return the edition form
-   LOMCT->>Data Veracity Assurance: Send metadata
-   Data Veracity Assurance->>LOMCT: Validates or not the decency of the edition
-   LOMCT->>Edge translators: Send keywords
-   Edge translators->>LOMCT: identify keyword terminology if necessary
    LOMCT->>LOMCT: Convert edition form into xAPI
    LOMCT->>LRS: Send trace
 ```
@@ -672,93 +655,6 @@ sequenceDiagram
 
 - enter LRS url and user credential in LOMCT settings
 
-## Third Party Components & Licenses
-
-External components and licenses:
-
-- chromium-based web browser extension V3, [open source](https://github.com/SimGus/chrome-extension-v3-starter), [license MIT](https://github.com/SimGus/chrome-extension-v3-starter?tab=MIT-1-ov-file#readme)
-
-## Implementation Details
-
-*This is optional: remove this heading if not needed.*
-
-*You can add details about implementation plans and lower-level design here.*
-
-## OpenAPI Specification
-
-*In the future: link your OpenAPI spec here.*
-
-
-```yml
-
-openapi: 3.0.0 \
-info: \
-     version: 0.0.1 \
-     title: Learning object metadata crowd tagging \
-   description: Learning Object Metadata Crowd Tagging is a service to easily review or tag digital learning resources such as videos, presentations, and documents by a crowd of individuals. The goal is to make these resources more discoverable and searchable by adding/changing relevant keywords, descriptions, and other metadata or by attaching them a review. Users interacts with this service using a browser extension. \
-paths: \
-     /list: \
-          get: \
-               description: Returns a list of stuff \
-                    responses: \
-                         '200': \
-                              description: Successful response
-
-
-```
-
-## Test specification
-
-*Test definitions and testing environment should be availaible, and the tests should be repeatable.*
-
-### Test plan
-
-Once the architecture has been defined, precise endpoint mockups will be developed. This will enable interaction with sample data.
-
-*To be detailed.*
-
-### Internal unit tests
-
-*Here specify the test cases for the units inside the BB.*  
-
-*Candidates for tools that can be used to implement the test cases: JUnit, Mockito, Pytest.*
-
-### Component-level testing
-
-*Here specify how to test this component/BB as a whole. This is similar to how other BBs will use this component.*
-
-*Candidates for tools that can be used to implement the test cases: K6, Postman, stepci, Pact*
-
-*An example tutorial is available [here](https://github.com/ftsrg-edu/swsv-labs/wiki/2b-Integration-testing).*
-
-### UI test (where relevant)
-
-Please note that the following visuals are intended as projections only. UX/UI work will be carried out later in the process.
-
-![Enter image alt description](Images/EWJ_Image_1.jpeg)
-
-## Partners & roles
-[Inokufu](https://www.inokufu.com/) (BB leader): 
-- Organize workshops
-- Monitor partner progress
-- Develop backend of LOMCT
-- Develop frontend of LOMCT
-
-[edtake](https://www.edtake.com/)
-- test the extension
-
-## Usage in the dataspace
-The LOMCT will be used as a potential source of data for a LRS and thus be part of the service chains:
-
-- Personal learning record: Sharing LMS/Moodle Data for Visualization
-
-  
-![Diagram of service chain Sharing LMS/Moodle Data for Visualization](Images/BB%20Service%20chains%20_%20LRS%20Learning%20Records%20store.pptx%20(3).png)
-PDC : Prometheus-X Dataspace Connector
-
-- Decentralized AI training: Training of trustworthy AI models
-
-  # Configuration and deployment settings
 
 ## Error scenarios defined
 
@@ -793,6 +689,37 @@ If criticality is greater than 10, then preventive action must be taken. If not,
 | 17  | **Submit metadata edit proposal and write a review of a Learning object (LO) by the organization**    | The organization may decide to change its LRS                   | Complication in determining the source of truth                                                         | Change of LRS                                                                                        | 1                      | 2                       | 1                     | 2                        |                                                                                                                                                                                        |
 | 18  |                                                                                                        | The organization's statements are not differentiated from others | Reconnecting the LOMCT and the new LRS                                                                | Implementation                                                                                      | 5                      | 5                       | 5                     | 125                      | Detect when username = authority.name it is organization.                                                                                                                                                                                         |
 | 19  | Other                                                                                                  | Content Fragmentation                                           | No valorization of the organization's statements                                                        | The same LO is available on multiple sites and platforms with different URLs.                         | 1                      | 7                       | 5                     | 35                       | Assign a Global Unique Identifier (GUID) to each LO.                                                                                                                                                                                               |
+
+
+## Third Party Components & Licenses
+
+External components and licenses:
+
+- chromium-based web browser extension V3, [open source](https://github.com/SimGus/chrome-extension-v3-starter), [license MIT](https://github.com/SimGus/chrome-extension-v3-starter?tab=MIT-1-ov-file#readme)
+
+
+## OpenAPI Specification
+
+*In the future: link your OpenAPI spec here.*
+
+
+```yml
+
+openapi: 3.0.0 \
+info: \
+     version: 0.0.1 \
+     title: Learning object metadata crowd tagging \
+   description: Learning Object Metadata Crowd Tagging is a service to easily review or tag digital learning resources such as videos, presentations, and documents by a crowd of individuals. The goal is to make these resources more discoverable and searchable by adding/changing relevant keywords, descriptions, and other metadata or by attaching them a review. Users interacts with this service using a browser extension. \
+paths: \
+     /list: \
+          get: \
+               description: Returns a list of stuff \
+                    responses: \
+                         '200': \
+                              description: Successful response
+
+
+```
 
 # Test specification
 
@@ -1024,3 +951,30 @@ Using the personas, user stories, user flow, and data flow from the Wiki LOM use
 
 **Validation:**
 - Statements visible on LRS.
+
+### UI test (where relevant)
+
+Please note that the following visuals are intended as projections only. UX/UI work will be carried out later in the process.
+
+![Enter image alt description](Images/EWJ_Image_1.jpeg)
+
+## Partners & roles
+[Inokufu](https://www.inokufu.com/) (BB leader): 
+- Organize workshops
+- Monitor partner progress
+- Develop backend of LOMCT
+- Develop frontend of LOMCT
+
+[edtake](https://www.edtake.com/)
+- test the extension
+
+## Usage in the dataspace
+The LOMCT will be used as a potential source of data for a LRS and thus be part of the service chains:
+
+- Personal learning record: Sharing LMS/Moodle Data for Visualization
+
+  
+![Diagram of service chain Sharing LMS/Moodle Data for Visualization](Images/BB%20Service%20chains%20_%20LRS%20Learning%20Records%20store.pptx%20(3).png)
+PDC : Prometheus-X Dataspace Connector
+
+- Decentralized AI training: Training of trustworthy AI models

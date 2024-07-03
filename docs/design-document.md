@@ -956,7 +956,10 @@ Using the personas, user stories, user flow, and data flow from the Wiki LOM use
 
 Please note that the following visuals are intended as projections only. UX/UI work will be carried out later in the process.
 
-![Enter image alt description](Images/EWJ_Image_1.jpeg)
+![LOMCT1](https://github.com/Prometheus-X-association/lomct/assets/129832540/7d6ad2db-f8bc-4010-b1bd-0fb738e1e4b3)
+![LOMCT1](https://github.com/Prometheus-X-association/lomct/assets/129832540/dc55351e-ac99-47ff-af29-757bcfaddc10)
+![LOMCT1](https://github.com/Prometheus-X-association/lomct/assets/129832540/9557b7cf-f651-4a64-b92e-7fedd12031d2)
+
 
 ## Partners & roles
 [Inokufu](https://www.inokufu.com/) (BB leader): 

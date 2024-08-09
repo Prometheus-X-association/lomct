@@ -135,7 +135,7 @@ Why?
 
 - Identify sites where we can import
 
-**Interact with Edge computing - AI processing**
+**Interact with Edge computing - AI training**
 
 How?
 

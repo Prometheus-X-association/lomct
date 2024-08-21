@@ -131,9 +131,9 @@ Why?
 
 - Identify data import period (date, time, week)
 
-- Identify keywords where we can import
+- Identify keywords where LOMCT operator can import
 
-- Identify sites where we can import
+- Identify sites where LOMCT operator can import
 
 **Interact with Edge computing - AI training**
 
@@ -652,8 +652,10 @@ sequenceDiagram
 - install a LRS
 
 - install LOMCT browser extension (available on Chrome first)
+  **Configuration**
 
-- enter LRS url and user credential in LOMCT settings
+- Enter the URL(s) of the LRS in the LOMCT settings.
+- Enter the user credentials in the LOMCT settings.
 
 
 ## Error scenarios defined
@@ -678,7 +680,7 @@ If criticality is greater than 10, then preventive action must be taken. If not,
 | 6   |                                                                                                        | User posts vulgar or insulting words                            | Unnecessary comment                                                                                    | Space for expression                                                                                | 1                      | 2                       | 6                     | 12                       | Can be connected to BB Data veracity assurance (EDGE-Skill)                                                                                                                          |
 | 7   |                                                                                                        | The user is linked to several schools                          | Connection required with several LRS                                                                   | Implementation                                                                                      | 3                      | 5                       | 2                     | 10                       | Send statement to various LRS                                                                                                                                                        |
 | 8   |                                                                                                        | Personal information is sent to LRS                             | Non-compliance with RGPD                                                                               | Implementation                                                                                      | 4                      | 2                       | 9                     | 54                       | All these data are stored locally in the user browser/desktop.                                                                                                                                                                                     |
-| 9   | **Visualize all metadata edit proposals and reviews associated to a LO**                              | The user proposes a false edition                               | False metadata                                                                                         | Space for expression                                                                                | 1                      | 3                       | 7                     | 84                       | A unique user id must be associated with the user for each LRS he is connected to.                                                                                                                                                                  |
+| 9   | **Visualize all metadata edit proposals and reviews associated to a LO**                              | The user proposes a false edition                               | False metadata                                                                                         | Space for expression                                                                                | 1                      | 3                       | 7                     | 84                       | A unique user id is used to distinguish users contributions from the admin statements, seen as the truth.                                                                                                                                                                  |
 | 10  |                                                                                                        | Metadatas don't update                                          | Poor visualization of the metadata                                                                     | Slow update due to servers                                                                           | 4                      | 3                       | 8                     | 16                       | The data proposed by the user is not posted as truthful but in a space that states that it is an editing proposal                                                                                                                                  |
 | 11  |                                                                                                        | Inadequate user interface                                       | No use of the platform                                                                                 | UI design is misleading                                                                              | 4                      | 9                       | 8                     | 96                       | Optimize extension                                                                                                                                                                   |
 | 12  |                                                                                                        | Wrong design choices: colors, shapes, ...                        | No use of the platform                                                                                 | Visual choices such as colors and graphics can subliminally influence the perception of data. Graphs are non-inclusive | 1                      | 7                       | 5                     | 96                       | Conduct pre-development workshops to ascertain user requirements                                                                                                                                                                                  |
@@ -734,7 +736,7 @@ The LOMCT testing strategy will focus on ensuring the accuracy, reliability, and
 
 ## Methodology
 
-We will run manual and automatic tests.
+We will run manual tests.
 
 ### Manual Scenario
 
@@ -933,24 +935,6 @@ Using the personas, user stories, user flow, and data flow from the Wiki LOM use
 - Both statements visible on LRS.
 - Displayed in "Suggested edits" section chronologically.
 
-### Automatic tests
-
-#### Auto1: Transfer test
-
-**Automatic transfer of learning statements once a week.**
-
-**Validation:**
-- Statements visible on LRS.
-
-#### Auto2: Scalability test
-
-**Automatic transfer of learning statements:**
-- 1 time per week
-- 1 time per day
-- 2 times per day
-
-**Validation:**
-- Statements visible on LRS.
 
 ### UI test (where relevant)
 

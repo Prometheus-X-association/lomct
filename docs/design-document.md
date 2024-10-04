@@ -723,6 +723,22 @@ paths: \
 
 ```
 
+## Codebase : Mockup version
+To get a functional understanding of this mockup and see some sample traces, go here : https://github.com/Prometheus-X-association/lomct/blob/main/docs/Images/LOMCT%20-%20Mock%20up%20.pdf
+
+To have a write access to the traces make a request on this mockup document : https://docs.google.com/document/d/15sV1DR43r0GAP8EV8HmT0b-k0m4glPzQUwgn95XYrSQ/edit
+To have a read access to the traces make a request on this mockup document: https://docs.google.com/document/d/1qqDXDdfBkC5TJS1AgR7Wh72-h3mchLmyboX0hOquAZM/edit
+To have all access to the traces make a request on this mockup document : https://docs.google.com/document/d/1Yp6LGh18bzp5Vbj4KiwYLZnBhedBAevjNxp07ao-HM8/edit
+
+### PUT
+description: Store a single statement as a single member of a set.
+
+### POST
+description: "Store a set of statements (or a single statement as a single member of a set).
+
+### GET
+description: Read a single xAPI Statement or multiple xAPI Statements.
+
 # Test specification
 
 The Learning Object Metadata Crowd Tagging tests ensure that:

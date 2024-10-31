@@ -1,0 +1,1 @@
+(function(){"use strict";console.log("content script loaded"),chrome.runtime.onMessage.addListener(function(r,c,n){var e;const t=(e=document.querySelector('link[rel="canonical"]'))==null?void 0:e.getAttribute("href");return n(t),!0})})();

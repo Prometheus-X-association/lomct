@@ -520,80 +520,32 @@ Here is the corresponding xAPI statement:
 ```
 
 ## Architecture
-```mermaid
-classDiagram
-   LOMCT <|-- LRS
-   LRS <|-- LRS_PDC
-   LRS_PDC <|-- LRS
-   LRS_PDC <|-- CC_PDC
-   CC_PDC <|-- LRS_PDC
-   CC_PDC <|-- Consent_Contracts
-   Consent_Contracts <|-- CC_PDC
-   LRS_PDC <|-- DVA_PDC
-   DVA_PDC <|-- LRS_PDC
-   DVA_PDC <|-- Data_veracity_assurance
-   Data_veracity_assurance <|-- DVA_PDC
-   LRS_PDC <|-- ET_PDC
-   ET_PDC <|-- LRS_PDC
-   ET_PDC <|-- EDGE_translator
-   EDGE_translator <|-- ET_PDC
-   class LRS_PDC{
-     identity()
-     catalog()
-     contract()
-     consent()
-   }
-   class CC_PDC{
-     identity()
-     catalog()
-     contract()
-     consent()
-   }
-   class DVA_PDC{
-     identity()
-     catalog()
-     contract()
-     consent()
-   }
-   class ET_PDC{
-     identity()
-     catalog()
-     contract()
-     consent()
-   }
-   class Consent_Contracts{
-     bool week[7]
-     int begin[7]
-     int end[7]
-     string trigger_keywords[]
-     add_trigger_keyword(string)
-     change_track()
-   }
-   class Data_veracity_assurance{
-     bool decent
-     metadata_decent()
-   }
-   class EDGE_translator{
-     String lo_keywords[]
-     add_lo_keyword()
-   }
-```
-PDC : Prometheus-X Dataspace Connector
+
+For the architecture diagrams, we assume that the organization has :
+- deployed an LRS with a client and a store for LOMCT
+- sent credentials to users
+
+We also assume that users have :
+- installed the LOMCT extension
+- filled in their mail, username and biography
+- filled in the LRS: source and basic auth
+- validated the consent check box
 
 
 Dynamic Behaviour
-Behavior to display a resource :
+Behavior to display a resource, feature : Visualize all metadata edit proposals and reviews associated to a LO :
 ```mermaid
 sequenceDiagram
    actor User as User
    User->>LOMCT: Open LOMCT extension
+   LOMCT->>LOMCT: Detects the url where the user is located
    LOMCT->>LRS: Request LO metadata
    LRS->>LOMCT: Send LO metadata
    LOMCT->>User: Display the extension with metadata
 ```
 PDC : Prometheus-X Dataspace Connector
 
-Behavior to edit the metadata of a resource (the identification, consent and contract steps have already been completed when the extension is displayed) :
+Behavior to edit the metadata of a resource (the identification, consent and contract steps have already been completed when the extension is displayed), features : Submit metadata edit proposal for a Learning object (LO) by an individual and Write a review for a LO by an individual :
 ```mermaid
 sequenceDiagram
    actor User as User
@@ -608,14 +560,26 @@ sequenceDiagram
 
 **Deployment and installation:**
 
-- install a LRS
+The organization must :
+- deploy an LRS (learning locker for example)
 
+The user (learner, teacher, ...) must :
 - install LOMCT browser extension (available on Chrome first)
   
 **Configuration**
 
-- Enter the URL(s) of the LRS in the LOMCT settings.
-- Enter the user credentials in the LOMCT settings.
+The organization must :
+- Create a store in LRS
+- Create a client associate to the  store in LRS
+- Give read and write access to the client
+- Send to users : url of xAPI Endpoint and Basic Auth
+
+The user must create an account by filling in the form :
+- username
+- email
+- biography
+- the URL of xAPI Endpoint received by the organization
+- the basic auth key received by the organization
 
 
 ## Error scenarios defined

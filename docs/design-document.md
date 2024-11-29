@@ -732,16 +732,7 @@ Using the personas, user stories, user flow, and data flow from the Wiki LOM use
 **Validation:**
 - Account creation with locally stored information.
 
-#### Persona 3: the authority
-**First install of authority**
-- Onboarding:
-  - Enter username: "French School Business"
-  - Write bio: "French School Business: Lyon"
-  - Connect primary LRS: "https://XXX.com/data/xAPIx"
-  - Accept the checkbox for visibility of username and biography.
-
-**Validation:**
-- Account creation with locally stored information.
+#### Persona 3: the authority of LRS: "https://XXX.com/data/xAPIx"
 
 ### Test scenarios
 
@@ -759,18 +750,6 @@ Using the personas, user stories, user flow, and data flow from the Wiki LOM use
 
 #### Test scenario 2
 
-**mmegauss (persona 1) writes a review:**
-- Learning Object: [https://en.wikipedia.org/wiki/Technology_readiness_level](https://en.wikipedia.org/wiki/Technology_readiness_level)
-- Review:
-  - Rating: 2/5
-  - Comment: “The level is subjective.”
-
-**Validation:**
-- Statement visible on connected LRS.
-- Review displayed in the reviews section of the correct learning object.
-
-#### Test scenario 3
-
 **mcgonagall (persona 2) writes a review:**
 - Learning Object: [https://www.youtube.com/watch?v=daM8YfBTNAg](https://www.youtube.com/watch?v=daM8YfBTNAg)
 - Review:
@@ -781,7 +760,7 @@ Using the personas, user stories, user flow, and data flow from the Wiki LOM use
 - Statement visible on both connected LRSs.
 - Review displayed only once in the reviews list.
 
-#### Test scenario 4
+#### Test scenario 3
 
 **mmegauss (persona 1) submits a metadata edit proposal:**
 - Learning Object: [https://www.youtube.com/watch?v=daM8YfBTNAg](https://www.youtube.com/watch?v=daM8YfBTNAg)
@@ -795,21 +774,7 @@ Using the personas, user stories, user flow, and data flow from the Wiki LOM use
 - Proposal visible on LRS.
 - Displayed in "Suggested Edits" section in the "information" extension.
 
-#### Test scenario 5
-
-**mmegauss (persona 1) submits a metadata edit proposal:**
-- Learning Object: [https://en.wikipedia.org/wiki/Pythagorean_theorem](https://en.wikipedia.org/wiki/Pythagorean_theorem)
-- Proposal:
-  - Change type to article.
-  - Title: Pythagorean theorem
-  - Provider: Wikipedia
-  - Bloom: discover
-
-**Validation:**
-- Proposal visible on LRS.
-- Displayed in "Suggested Edits" sections in "Home" and "information" extensions.
-
-#### Test scenario 6
+#### Test scenario 4
 
 **mcgonagall (persona 2) submits a metadata proposal:**
 - Learning Object: Quelle différence entre l'anglais américain et britannique ? Quel accent choisir : UK ou US ?
@@ -823,14 +788,15 @@ Using the personas, user stories, user flow, and data flow from the Wiki LOM use
 
 **Validation:**
 - Proposal visible on both connected LRSs.
-- Displayed only once in "Suggested Edits" section in "information" extension.
+- Displayed only once in "Suggested Edits" section.
 
-#### Test scenario 7
+#### Test scenario 5
 
-**The authority (Persona 3) submits metadata edit proposals:**
+**The authority (Persona 3) posts metadata edit directly in the LRS:**
 - Learning Object: What caused the French Revolution? - Tom Mullaney
-- Proposals:
-  1. Type: Podcast
+- Posts 2 statements:
+  1.On March 5 
+     - Type: Podcast
      - Bloom: describe compare
      - Level: expert
      - Title: History through time
@@ -840,7 +806,8 @@ Using the personas, user stories, user flow, and data flow from the Wiki LOM use
      - Duration: 5:38 minutes
      - Author: Tom Mullaney
 
-  2. Type: Video
+  2. On March 2 
+     - Type: Video
      - Title: what caused the French Revolution?
      - Level: novice
      - Provider: Youtube
@@ -850,9 +817,9 @@ Using the personas, user stories, user flow, and data flow from the Wiki LOM use
 - Statements visible on authority's LRS.
 - Only the statement published on March 5 displayed in "information" section.
 
-#### Test scenario 8
+#### Test scenario 6
 
-**mmegauss (persona 1) writes a review on a previously reviewed learning object:**
+**mmegauss (persona 1) writes 2 reviews on the same learning object:**
 - Learning Object: Langage Langue Parole (selon De Saussure) - Ma Langue dans Ta Poche #1
 - Previous review:
   - Date: 07-12-2017
@@ -867,9 +834,9 @@ Using the personas, user stories, user flow, and data flow from the Wiki LOM use
 - Both statements visible on LRS.
 - Only the newest review displayed in reviews list.
 
-#### Test scenario 9
+#### Test scenario 7
 
-**mcgonagall (persona 2) writes a review on a previously reviewed learning object:**
+**mcgonagall (persona 2) writes 2 reviews on the same learning object:**
 - Learning Object: [https://hbr.org/2016/05/embracing-agile](https://hbr.org/2016/05/embracing-agile)
 - Previous review:
   - Date: 01-04-2022
@@ -884,7 +851,7 @@ Using the personas, user stories, user flow, and data flow from the Wiki LOM use
 - All statements visible on both connected LRSs.
 - Only the newest review displayed in the reviews list.
 
-#### Test scenario 10
+#### Test scenario 8
 
 **mmegauss (persona 1) submits several metadata edit proposals:**
 - Learning Object: [https://en.wikipedia.org/wiki/President_of_the_United_States](https://en.wikipedia.org/wiki/President_of_the_United_States)
@@ -899,7 +866,7 @@ Using the personas, user stories, user flow, and data flow from the Wiki LOM use
 
 **Validation:**
 - Both statements visible on LRS.
-- Displayed in "Suggested edits" section chronologically.
+- Displayed statements in "Suggested edits" section chronologically.
 
 
 ### UI test (where relevant)

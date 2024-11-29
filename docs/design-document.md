@@ -100,26 +100,21 @@ Here is an example of how LOMCT is used by an employee of company:
 
 | Requirement ID | Short description | BB input format | BB output format | Any other constraints | Verified by scenario | Requirement type |
 |---|---|---|---|---|---|---|
-| BB-REQ_ID__1 | LOMCT must request building block consent via the Prometheus-X Dataspace Connector | API call | API response |  |  |  |
-| BB-REQ_ID__1.1 | Individuals must consent to the use of their data in LOMCT | API call | API response | If the answer is no, the user has no access to the extension | BB-SC-LOMCT-01 | DEP |
-| BB-REQ_ID__1.2 | Consent must be asked and verified in less than 30s | API call | API response |  | BB-SC-LOMCT-02 | PERF |
-| BB-REQ_ID__2 | LOMCT must request contracts from the building block consent via the Prometheus-X Dataspace Connector | API call | API response |  |  |  |
-| BB-REQ_ID__2.1 | The LOMCT must check with the contract manager through the Dataspace connector if a contract for the corresponding organization exists | API call | API response | | BB-SC-LOMCT-03 | DEP |
-| BB-REQ_ID__2.2 | Contract must be asked and verified in less than 30s | API call | API response |  | BB-SC-LOMCT-04 | PERF |
-| BB-REQ_ID__3 | LOMCT must connect with BB Consent/contracts negotiating agent (EDGE-Skill) |  |  |  |  |  |
-| BB-REQ_ID__3.1 | BB must send the individual's consent profile when the LOMCT asks to adjust what and when they are tracked: all-time connection, only on weekends, certain keywords, etc. | API call | consent profile | Request consent 1 time, then update if the profile is modified in the corresponding building bloc. Could be asynchronous | BB-SC-LOMCT-05 | DEP |
-| BB-REQ_ID__3.2 | BB must update the individual's consent profile to LOMCT when there are changes | consent profile | / | update if the profile is modified in the corresponding building bloc. Could be asynchronous | BB-SC-LOMCT-06 | DEP |
-| BB-REQ_ID__4 | LOMCT should connect with BB Data veracity assurance (EDGE-Skill) | API call | API response |  |  |  |
-| BB-REQ_ID__4.1 | BB Data veracity assurance should check dataset is decent | xAPI (DASES) dataset | response |  | BB-SC-LOMCT-06 | FUN |
-| BB-REQ_ID__5 | LOMCT should connect with BB EDGE translator (EDGE-Skill) |  |  |  |  |  |
-| BB-REQ_ID__5.1 | expand the keywords of LOs | call API | xAPI |  | BB-SC-LOMCT-07 | FUN |
-| BB-REQ_ID__5.2 | Exchange must be under 30s | API call | API response |  | BB-SC-LOMCT-08 | PERF |
+| BB-REQ_ID__1 | LOMCT must request the consent of collect data | | |  |  |  |
+| BB-REQ_ID__1.1 | Individuals must consent to the use of their data in LOMCT : mail, username and biography| chek box | chek box | If the answer is no, the user has no access to the extension | BB-SC-LOMCT-01 | DEP |
+| BB-REQ_ID__1.2 | Consent must be asked and verified in less than 30s |  | |  | BB-SC-LOMCT-02 | PERF |
+| BB-REQ_ID__2 | LOMCT should connect with BB Data veracity assurance (EDGE-Skill) | API call | API response |  |  |  |
+| BB-REQ_ID__2.1 | BB Data veracity assurance should check dataset is decent | xAPI (DASES) dataset | response |  | Not for the first version | FUN |
+| BB-REQ_ID__3 | LOMCT should connect with BB EDGE translator (EDGE-Skill) |  |  |  |  |  |
+| BB-REQ_ID__3.1 | expand the keywords of LOs | call API | xAPI |  |  Not for the first version  | FUN |
+| BB-REQ_ID__3.2 | Exchange must be under 30s | API call | API response |  |  Not for the first version  | PERF |
 
 ## Integrations
 
 ### Direct Integrations with Other BBs
 
 **Interact with Edge translators**
+*Not for the first version*
 
 How?
 
@@ -133,17 +128,8 @@ Why?
 
 - ensure a more efficient search thanks to numerous keywords
 
-**Interact with consent/contract**
-
-Why?
-
-- Identify data import period (date, time, week)
-
-- Identify keywords where LOMCT operator can import
-
-- Identify sites where LOMCT operator can import
-
 **Interact with Edge computing - AI training**
+*Not for the first version*
 
 How?
 
@@ -154,7 +140,7 @@ Why?
 - train AI model
 
 **Interact with Data veracity assurance**
-
+*Not for the first version*
 How?
 
 - send access to LRS
@@ -167,57 +153,6 @@ Why?
 
 - ensure data is decent
 
-### Integrations via Connector
-
-**Connection with connector**
-
-Why?
-
-- Simplify communication between the LOMCT and PTX CCs
-
-**Connection with contract** 
-
-Why?
-
-- Contract between LRS supplier and the organization
-
-What?
-
-- Obtain the organization's agreement to export user metadata to the LRS.
-
-- Identify the number of metadata authorized for updating.
-
-- Identify the authorized date range for sending metadata to LRS.
-
-- Agree on data format (xAPI).
-
-**Connection with consent**
-
-Why?
-
-- User consent to export/import his data
-
-What?
-
-- Obtain user consent to export metadata modified/added by him
-
-- Obtain the user's consent to share the metadata with the selected organization
-
-- Obtain consent to share/display metadata with other users
-
-**Connection with identity**
-
-Why?
-
-- Enable LOMCT to use users' identities to display metadata with other
-
-What?
-
-- Use the user's first and last name
-
-- Use the user's professional background
-
-- Use the user's educational background
 
 ## Relevant Standards
 
@@ -766,6 +701,14 @@ The LOMCT testing strategy will focus on ensuring the accuracy, reliability, and
 ## Methodology
 
 We will run manual tests.
+
+### Validate requirements
+Requirements validation tests
+
+| Verified by scenario| Description of requirement | Test | Status |
+|---|---|---|---|
+| BB-SC-LOMCT-01 | Individuals must consent to the use of their data in LOMCT : mail, username and biography| When creating an account, try to validate the account without validating the check box |  Validated : It is not possible to access the LOMCT without consenting to the sharing of its data |
+| BB-SC-LOMCT-02 | Consent must be asked and verified in less than 30s | LOMCT checks whether the person has an active consent checkbox  | Validated |
 
 ### Manual Scenario
 

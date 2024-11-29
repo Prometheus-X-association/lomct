@@ -30,8 +30,16 @@ Please note that the following visuals are intended as projections only. UX/UI w
 
 **Features**: 
 
+The LOMCT interacts with one or more Learning Records Stores. This LRS is deployed by an organization. Each organization will have its own metadata ecosystem, which can be shared at business model level in the dataspace. Data sent from the LOMCT to the LRS belongs to the organization holding the LRS. This implies :
+- The organization gives access to its LRS to the desired individuals.
+- Anyone with the LRS “source link” and “source basic auth” can post and view LRS metadata.
+- LOMCT does not manage the validation of edit proposals and reviews. Everything is sent to the targeted LRS with no particular status.
+- The organization must moderate edit proposals and reviews of its LRS. LOMCT does not offer this service.
+
+The Inokufu organization will offer an additional metadata moderation service.
+
 - **Submit metadata edit proposal of a Learning object (LO) by an individual** \
-Each Learning Object (video, article, podcast, …) is described by metadata: title, description, category, type, level, etc. Sometimes the metadata is wrong or missing. With LOMCT, each user can submit a metadata edit proposal. \
+Each Learning Object (video, article, podcast, …) is described by metadata: title, description, category, type, level, etc. Sometimes the metadata is wrong or missing. With LOMCT, each user can submit a metadata edit proposal. Once the proposal has been sent, the individual cannot edit it. The only way to modify/delete this metadata is via the LRS, by the LRS holder.\
 	Path: \
 		- "The individual is confronted with a resource that has few or incorrect metadata" \
 		- "The individual opens the LOMCT" \
@@ -41,7 +49,7 @@ Each Learning Object (video, article, podcast, …) is described by metadata: ti
 		- "LOMCT send the metadata edit proposal to the LO index (LRS), formatted as xAPI statement"
 
 - **Write a review of a LO by an individual** \
-The same Learning Object can be seen as relevant or not depending on the teacher point of view, his targeted learning outcome, his habits, etc. With LOMCT, each user can write his own review of the LO and explain why he finds it relevant or not for his needs.  \
+The same Learning Object can be seen as relevant or not depending on the teacher point of view, his targeted learning outcome, his habits, etc. With LOMCT, each user can write his own review of the LO and explain why he finds it relevant or not for his needs. Once the review has been sent, the individual cannot edit it. The only way to modify/delete the review is via the LRS by the LRS owner. On the other hand, if the individual sends a new review, this is the one that will be displayed. This does not overwrite the old review, but renders it obsolete. \
 	Path:  \
 		- "The individual is confronted with a resource that he wants to add a review" \
 		- "The individual opens the LOMCT" \

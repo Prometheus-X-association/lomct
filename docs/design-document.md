@@ -181,35 +181,51 @@ Why?
 block-beta
 
 columns 6
-LearningObject:1 LOMCT:1 LRS:1 LRS_PDC:1
 
 block:group1
 columns 1
-CC_PDC DVA_PDC ET_PDC EC_PDC
+LearningObject1 space LearningObject2 space LearningObject3
 end
 
 block:group2
 columns 1
-ConsentContracts DataVeracityAssurance EdgeTranslators EdgeComputing
+LOMCT_orga1 space LOMCT_orga2 space LOMCT_orga3
 end
+
+block:group3
+columns 1
+LRS_orga1 space LRS_orga2 space LRS_orga3
+end
+
+block:group4
+columns 1
+LRS_PDC1 space LRS_PDC2 space LRS_PDC3
+end
+
+LRS_orchestrator_PDC:1 LRS_orchestrator:1
+
 
 classDef colorA fill:#D22FF7,color:#fff
 classDef colorEx fill:#01D1D1,color:#fff
 classDef colorED fill:#6E7176,color:#fff
-class LearningObject colorEx
-class LRS colorEx
-class LOMCT colorED
-class EdgeComputing colorED
-class ConsentContracts colorED
-class DataVeracityAssurance colorED
-class EdgeTranslators colorED
-class LRS_PDC colorA
-class EC_PDC colorA
-class CC_PDC colorA
-class ET_PDC colorA
-class DVA_PDC colorA
+class LearningObject1 colorEx
+class LearningObject2 colorEx
+class LearningObject3 colorEx
+class LRS_orga1 colorEx
+class LRS_orga2 colorEx
+class LRS_orga3 colorEx
+class LRS_orchestrator colorEx
+class LOMCT_orga1 colorED
+class LOMCT_orga2 colorED
+class LOMCT_orga3 colorED
+class LRS_PDC1 colorA
+class LRS_PDC2 colorA
+class LRS_PDC3 colorA
+class LRS_orchestrator_PDC colorA
 ```
 PDC : Prometheus-X Dataspace Connector
+
+Each organization will generate metadata in its LRS, then send it to the LRS orchestrator for exchange in dataspace.
 
 ## Input / Output Data
 

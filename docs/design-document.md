@@ -5,7 +5,7 @@ Learning Object Metadata Crowd Tagging is a method for tagging and reviewing dig
 The LOMCT is a data service (browser extension) which facilitates the collection of feedback from teachers, learners, course designers, ... about LO (metadata, reviews). The LO index is a data source (LRS) for organizations which want to store metadata and reviews of LO submitted by their learners, teachers or course designers.
 
 Here is a visual of the LOMCT extension
-![LOMCT1](<img width="1434" alt="home" src="https://github.com/user-attachments/assets/ca997cfd-3011-4d89-9649-a2a28f1863b1">)
+<img width="1434" alt="home" src="https://github.com/user-attachments/assets/f050585a-2f92-4210-9016-45f8fbb0b95a">
 
 The LOMCT extension plays a crucial role within the dataspace ecosystem, serving as a vital component that, despite its integral presence, does not engage in direct interaction with the dataspace itself. This design choice highlights the modular nature of the system, where each component has specialized functions. 
 

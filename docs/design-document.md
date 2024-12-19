@@ -5,7 +5,7 @@ Learning Object Metadata Crowd Tagging is a method for tagging and reviewing dig
 The LOMCT is a data service (browser extension) which facilitates the collection of feedback from teachers, learners, course designers, ... about LO (metadata, reviews). The LO index is a data source (LRS) for organizations which want to store metadata and reviews of LO submitted by their learners, teachers or course designers.
 
 Here is a visual of the LOMCT extension
-<img width="1434" alt="home" src="https://github.com/user-attachments/assets/f050585a-2f92-4210-9016-45f8fbb0b95a">
+<img width="1434" alt="home" src="Images/fig1.png">
 
 The LOMCT extension plays a crucial role within the dataspace ecosystem, serving as a vital component that, despite its integral presence, does not engage in direct interaction with the dataspace itself. This design choice highlights the modular nature of the system, where each component has specialized functions. 
 
@@ -518,29 +518,29 @@ A first version of LOMCT has been deployed. Its purpose is to validate the funct
 ## UX/UI
 
 ### First Time Onboarding
-<img width="1429" alt="First-onboarding" src="https://github.com/user-attachments/assets/ecd2cad5-3c3b-4d7b-9fe4-f9653e160dcb">
+<img width="1429" alt="First-onboarding" src="Images/fig2.png">
 
 ### Home extension
-<img width="1434" alt="home" src="https://github.com/user-attachments/assets/f050585a-2f92-4210-9016-45f8fbb0b95a">
+<img width="1434" alt="home" src="Images/fig3.png">
 
 ### Informations
 
 #### More information
-<img width="1429" alt="metadata-more" src="https://github.com/user-attachments/assets/a29ec648-0bb6-4648-ba4a-d8334a63503b">
+<img width="1429" alt="metadata-more" src="Images/fig4.png">
 
 #### Metadata edit proposal
-<img width="1433" alt="metadata-edit" src="https://github.com/user-attachments/assets/982e3d81-8592-4f11-8cb6-f18ad4a32451">
+<img width="1433" alt="metadata-edit" src="Images/fig5.png">
 
 ### Reviews
 
 #### More reviews
-<img width="1424" alt="Review-more" src="https://github.com/user-attachments/assets/e1b7f751-e50e-4564-b2c0-287f28e1ce25">
+<img width="1424" alt="Review-more" src="Images/fig6.png">
 
 #### Add review
-<img width="1426" alt="Review-add" src="https://github.com/user-attachments/assets/92c5e52b-99b7-47a4-81df-b8dc956d5b16">
+<img width="1426" alt="Review-add" src="Images/fig7.png">
 
 ### Options
-<img width="1431" alt="Options" src="https://github.com/user-attachments/assets/d9d289da-eed9-41ea-94d5-8d7870b1e94a">
+<img width="1431" alt="Options" src="Images/fig8.png">
 
 
 # Test specification

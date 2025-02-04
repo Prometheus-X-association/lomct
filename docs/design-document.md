@@ -581,8 +581,12 @@ Before installing the LOMCT extension, ensure you have:
 
 ### Don't have an LRS ?
 If you don't have an LRS you can directly add the LRS of Inokufu in the primary source link :
-    - Configure the secondary source link : https://lrs.dataspace.inokufu.com/data/xAPI
-    - Configure the secondary source basic auth : NzkxMjlhNzRmNjUyZmI0NmU0NTA5Y2Y5MTdkMmY0ZWU1YjkxYjZkYTo4YWU0MGNhNjJjMmM4NTE4YzZjMzAwZDBhNGI4OTE4YTI0M2I1YjRl 
+- Configure the primary source link : https://lrs.dataspace.inokufu.com/data/xAPI
+- Configure the primary source basic auth : NzkxMjlhNzRmNjUyZmI0NmU0NTA5Y2Y5MTdkMmY0ZWU1YjkxYjZkYTo4YWU0MGNhNjJjMmM4NTE4YzZjMzAwZDBhNGI4OTE4YTI0M2I1YjRl
+
+For the secondary source link you can add this LRS :
+- Configure the secondary source link : https://lrs.dataspace.inokufu.com/data/xAPI
+- Configure the secondary source basic auth : Njk2NjM2MGVhYzYxYTQxN2MxOGMyMTA0MjgxZmMzYmNkNGMyZmQ2MDpiN2NkNDgyNzdmNjBhMWFjODc3MjEzMWYxNmI3ODU5ZjE5NWI1MTVh
 
 ## Test
 The LOMCT testing strategy will focus on ensuring the accuracy, reliability, and performance of its functionality. We will use a combination of unit testing, integration testing, and user interface testing. The test environment will reproduce conditions similar to those in production in order to accurately validate BB behavior. Acceptance criteria will be defined based on user stories, functional requirements, and performance criteria.
@@ -597,7 +601,7 @@ Summary of test :
 Tests to validate requirements and potential risks.
 
 | Verified by scenario| Description | Prerequisites | Test | Status |
-|---|---|---|---|
+|---|---|---|---|---|
 | BB-SC-LOMCT-01 | Individuals must consent to the use of their data in LOMCT : mail, username and biography| Browser extension installed but not logged| When creating an account, try to validate the account without validating the check box |  Validated : It is not possible to access metadata without consenting to the sharing of its data |
 | BB-SC-LOMCT-02 | The organization's LRS must be connected to the data space to access the orchestrator's LRS |  Browser extension installed and logged, LRS of organization not connected to the PDC and not involved in the use case | Try to access the orchestrator's LRS without the organization's LRS being linked to the dataspace | Not yet validated |
 | BB-SC-LOMCT-03 | LOMCT must send traces to organization's LRS in less than 30 seconds (after triggering the individual) |  Browser extension installed and logged, have an access to the LRS of the organization | Average send time < 30 seconds | Not yet validated |

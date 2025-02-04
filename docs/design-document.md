@@ -550,73 +550,112 @@ The Learning Object Metadata Crowd Tagging tests ensure that:
 - potential risks are under control
 - users are satisfied
 
-## Test
+## Test reproduction
+To reproduce (manual) tests, you need to [install the LOMCT extension](https://github.com/Prometheus-X-association/lomct/blob/main/docs/How%20to%20install%20LOMCT.md).
 
+### Prerequisites
+Before installing the LOMCT extension, ensure you have:
+- Chrome browser
+- A Learning Record Store (LRS) endpoint URL
+- A basic auth url for your LRS
+
+### Running instructions
+1. Download the latest release
+2. Get into developer mode with Chrome extension management
+3. Click on `Load Unpacked`
+4. Select the `src` folder
+5. You can pin the extension (or not)
+
+### Configuration
+1. Open the extension and fill in the required fields:
+    - username
+    - e-mail address
+    - biography (this can be your job or profession)
+    - endpoint of your LRS
+    - basic auth of you LRS
+2. Add a secondary source managed by Inokufu (content shared in Prometheus-X and moderated)
+    - Navigate to `options` of the extension
+    - Activate the secondary source
+    - Configure the secondary source link : https://lrs.dataspace.inokufu.com/data/xAPI
+    - Configure the secondary source basic auth : NzkxMjlhNzRmNjUyZmI0NmU0NTA5Y2Y5MTdkMmY0ZWU1YjkxYjZkYTo4YWU0MGNhNjJjMmM4NTE4YzZjMzAwZDBhNGI4OTE4YTI0M2I1YjRl 
+
+### Don't have an LRS ?
+If you don't have an LRS you can directly add the LRS of Inokufu in the primary source link :
+    - Configure the secondary source link : https://lrs.dataspace.inokufu.com/data/xAPI
+    - Configure the secondary source basic auth : NzkxMjlhNzRmNjUyZmI0NmU0NTA5Y2Y5MTdkMmY0ZWU1YjkxYjZkYTo4YWU0MGNhNjJjMmM4NTE4YzZjMzAwZDBhNGI4OTE4YTI0M2I1YjRl 
+
+## Test
 The LOMCT testing strategy will focus on ensuring the accuracy, reliability, and performance of its functionality. We will use a combination of unit testing, integration testing, and user interface testing. The test environment will reproduce conditions similar to those in production in order to accurately validate BB behavior. Acceptance criteria will be defined based on user stories, functional requirements, and performance criteria.
+
+Summary of test :
+- Validate requirements and potential risks
+- Testing independent features
+- Manual Usage Scenario
+- UX/UI test
 
 ### Validate requirements and potential risks
 Tests to validate requirements and potential risks.
 
-| Verified by scenario| Description | Test | Status |
+| Verified by scenario| Description | Prerequisites | Test | Status |
 |---|---|---|---|
-| BB-SC-LOMCT-01 | Individuals must consent to the use of their data in LOMCT : mail, username and biography| When creating an account, try to validate the account without validating the check box |  Validated : It is not possible to access the LOMCT without consenting to the sharing of its data |
-| BB-SC-LOMCT-02 | The organization's LRS must be connected to the data space to access the orchestrator's LRS | Try to access the orchestrator's LRS without the organization's LRS being linked to the dataspace | Not yet validated |
-| BB-SC-LOMCT-03 | LOMCT must send traces to organization's LRS in less than 30 seconds (after triggering the individual) | Average send time < 30 seconds | Not yet validated |
-|Error-Scenario_2 | Data could be transmitted to other non-targeted LRSs |See where statements are sent| Validated : Statements are sent only to the target LRS|
-|Error-Scenario_3 | Personal information is sent to LRS (other than email)|Check the LRS for visible statements | Validated : No personal information other than the e-mail is sent to LRS|
-|Error-Scenario_4 | The user proposes a false edition| Post a proposal edit with fals information and see if it is diplayed in the "information" or in "Suggested edits" section| Validated : It is displayed in the "Suggested edits"|
-|Error-Scenario_6 | Inadequate user interface| Conduct quantitative and qualitative tests |Not yet validated|
-|Error-Scenario_7 | Wrong design choices: colors, shapes, ...| Conduct quantitative and qualitative tests |Not yet validated|
-|Error-Scenario_8 | Identical statements in the same or several LRS| Post the same metadata 2 times and see whether it is displayed 1 or 2 times | Validated|
-|Error-Scenario_9 | The user is linked to several organizations| Have 2 LRS and see if information from the first source is highlighted | Validated : Primary source information is highlighted|
-|Error-Scenario_10 | Several reviews from the same individual are detected|Post 2 reviews and see whether it is displayed 1 or 2 times |  Validated : display one time (most recent)|
-|Error-Scenario_11 | Several metadata edit proposal from the same individual are detected|Post 2 metadata editing proposals and see if they are both displayed (chronologically) |  Validated : The 2 are displayed chronologically|
-|Error-Scenario_13 | The organization's statements are not differentiated from individual's statements| Manually post an organization statement in the LRS with the verb “proposed” associated with an LO, then check in the LOMCT that this statement is visible in the “information” section | Validated : The statement is display in the "information" section|
-|Error-Scenario_19 | Content Fragmentation |Check if the statements are the same if the endpoints of the same url are different| Partially validated : Ok for canonical urls|
+| BB-SC-LOMCT-01 | Individuals must consent to the use of their data in LOMCT : mail, username and biography| Browser extension installed but not logged| When creating an account, try to validate the account without validating the check box |  Validated : It is not possible to access metadata without consenting to the sharing of its data |
+| BB-SC-LOMCT-02 | The organization's LRS must be connected to the data space to access the orchestrator's LRS |  Browser extension installed and logged, LRS of organization not connected to the PDC and not involved in the use case | Try to access the orchestrator's LRS without the organization's LRS being linked to the dataspace | Not yet validated |
+| BB-SC-LOMCT-03 | LOMCT must send traces to organization's LRS in less than 30 seconds (after triggering the individual) |  Browser extension installed and logged, have an access to the LRS of the organization | Average send time < 30 seconds | Not yet validated |
+|Error-Scenario_2 | Data could be transmitted to other non-targeted LRSs |  Have an access to the LRS of the organization|See where statements are sent| Validated : Statements are sent only to the target LRS|
+|Error-Scenario_3 | Personal information is sent to LRS (other than email) |  Have an access to the LRS of the organization |Check the LRS for visible statements | Validated : No personal information other than the e-mail is sent to LRS|
+|Error-Scenario_4 | The user proposes a false edition |  Browser extension installed and logged | Post a proposal edit with fals information and see if it is diplayed in the "information" or in "Suggested edits" section| Validated : It is displayed in the "Suggested edits"|
+|Error-Scenario_6 | Inadequate user interface |  Browser extension installed and logged| Conduct quantitative and qualitative tests |Not yet validated|
+|Error-Scenario_7 | Wrong design choices: colors, shapes, ... |  Browser extension installed and logged| Conduct quantitative and qualitative tests |Not yet validated|
+|Error-Scenario_8 | Identical statements in the same or several LRS |  Browser extension installed and logged| Post the same metadata 2 times and see whether it is displayed 1 or 2 times | Validated only one is visible |
+|Error-Scenario_9 | The user is linked to several organizations|  Browser extension installed and logged. Have a primary and a secondary sources linked | See if information from the first source is highlighted | Validated : Primary source information is highlighted|
+|Error-Scenario_10 | Several reviews from the same individual are detected |  Browser extension installed and logged |Post 2 reviews and see whether it is displayed 1 or 2 times |  Validated : display one time (most recent)|
+|Error-Scenario_11 | Several metadata edit proposal from the same individual are detected |  Browser extension installed and logged |Post 2 metadata editing proposals and see if they are both displayed (chronologically) |  Validated : The 2 are displayed chronologically|
+|Error-Scenario_13 | The organization's statements are not differentiated from individual's statements|  Browser extension installed and logged. Have access to the LRS of the organization| Manually post an organization statement in the LRS with the verb “proposed” associated with an LO, then check in the LOMCT that this statement is visible in the “information” section | Validated : The statement is display in the "information" section|
+|Error-Scenario_19 | Content Fragmentation |  Browser extension installed and logged. Have access to the LRS of the organization|Check if the statements are the same if the endpoints of the same url are different| Partially validated : Ok for canonical urls|
 
-### Manual Scenario (small features)
+### Testing independent features
 
-Small manual scenarios to prove features (button, ...)
+Small manual test to prove features (button, ...)
 
 #### Test Case 1: Verify Logo Icon
-**Objective:** Ensure the extension logo matches the specified icon and color. 
+Objective: Ensure the extension logo matches the specified icon and color. 
 
-**Precondition:** The extension is installed and enabled. 
+Precondition: The extension is installed and enabled. 
 
-**Steps:** 
+Steps:
 - Open Google Chrome.
 - Locate the extension icon in the toolbar.
 - Verify the icon matches https://www.iconfinder.com/icons/8725689/comment_info_icon.
 - Verify the icon color is #1F8AFF.
   
-**Expected Result:** The extension logo icon and color match the specified design.
+Expected Result: The extension logo icon and color match the specified design.
 
-**Result:** Validated.
+Result: Validated.
 
 #### Test Case 2: Verify Extension Display on Click
-**Objective:** Ensure the extension is displayed when the logo is clicked. 
+Objective: Ensure the extension is displayed when the logo is clicked. 
 
-**Precondition:** The extension is installed and enabled.
+Precondition: The extension is installed and enabled.
 
-**Steps:**
+Steps:
 - Open Google Chrome.
 - Click on the extension logo.
 
-**Expected Result:** The extension popup is displayed as a 300 px square on top of the page.
+Expected Result: The extension popup is displayed as a 300 px square on top of the page.
 
-**Result:** Validated.
+Result: Validated.
 
 #### Test Case 3: Verify Extension Removal on Click
-**Objective:** Ensure the extension is hidden when the logo is clicked again.
+Objective: Ensure the extension is hidden when the logo is clicked again.
 
-**Precondition:** The extension popup is displayed.
+Precondition: The extension popup is displayed.
 
-**Steps:**
+Steps:
 - Click on the extension logo again.
 
-**Expected Result:** The extension popup is hidden.
+Expected Result: The extension popup is hidden.
 
-**Result:** Validated.
+Result: Validated.
 
 
 ...
@@ -630,58 +669,65 @@ Small manual scenarios to prove features (button, ...)
 Using the personas, user stories, user flow, and data flow from the Wiki LOM use case, we established several test scenarios.
 
 #### Persona 1: mmegauss (1 LRS)
-**First time install with 1 LRS**
+First time install with 1 LRS
 - Onboarding:
   - Enter username: "mmegauss"
   - Write bio: "Professeur de linguistique au M2 Sciences Po Paris"
-  - Connect one LRS: "https://XXX.com/data/xAPI"
+  - Connect the primary source link : https://lrs.dataspace.inokufu.com/data/xAPI
+  - Configure the secondary source basic auth : NzkxMjlhNzRmNjUyZmI0NmU0NTA5Y2Y5MTdkMmY0ZWU1YjkxYjZkYTo4YWU0MGNhNjJjMmM4NTE4YzZjMzAwZDBhNGI4OTE4YTI0M2I1YjRl 
   - Accept the checkbox for visibility of username and biography.
 
-**Validation:**
+Validation:
 - Account creation with locally stored information.
 
 #### Persona 2: mcgonagall (2 LRS)
-**First time install with 2 LRSs**
+First time install with 2 LRSs
 - Onboarding:
   - Enter username: "mcgonagall"
   - Write bio: "Management professor at Cambridge University"
-  - Connect primary LRS: "https://XXX.com/data/xAPIx"
+  - Connect the primary source link : https://lrs.dataspace.inokufu.com/data/xAPI
+  - Configure the primary source basic auth : NzkxMjlhNzRmNjUyZmI0NmU0NTA5Y2Y5MTdkMmY0ZWU1YjkxYjZkYTo4YWU0MGNhNjJjMmM4NTE4YzZjMzAwZDBhNGI4OTE4YTI0M2I1YjRl 
   - Accept the checkbox for visibility of username and biography.
   - Continue to settings extension page.
-  - Connect secondary LRS: "https://XXX2.com/data/xAPIx"
+  - Connect the secondary source link : https://lrs.dataspace.inokufu.com/data/xAPI
+  - Configure the secondary source basic auth : Njk2NjM2MGVhYzYxYTQxN2MxOGMyMTA0MjgxZmMzYmNkNGMyZmQ2MDpiN2NkNDgyNzdmNjBhMWFjODc3MjEzMWYxNmI3ODU5ZjE5NWI1MTVh
 
-**Validation:**
+Validation:
 - Account creation with locally stored information.
 
-#### Persona 3: the authority of LRS: "https://XXX.com/data/xAPIx"
+#### Persona 3: the authority of LRS: "https://lrs.dataspace.inokufu.com/data/xAPIx"
 
 #### Test scenario 1
 
-**mmegauss (persona 1) writes a review:**
+mmegauss (persona 1) writes a review:
 - Learning Object: [https://www.youtube.com/watch?v=hLE-5ElGlPM](https://www.youtube.com/watch?v=hLE-5ElGlPM)
 - Review:
   - Rating: 5/5
   - Comment: “Fantastic video for every history student in the Bachelor of Medieval History.”
-
-**Validation:**
+  
+Validation:
 - Statement visible on connected LRS.
 - Review displayed in the reviews section.
 
+Test scenario 1 : Validated
+
 #### Test scenario 2
 
-**mcgonagall (persona 2) writes a review:**
+mcgonagall (persona 2) writes a review:
 - Learning Object: [https://www.youtube.com/watch?v=daM8YfBTNAg](https://www.youtube.com/watch?v=daM8YfBTNAg)
 - Review:
   - Rating: 4/5
   - Comment: “Good podcast to understand the Second World War.”
 
-**Validation:**
+Validation:
 - Statement visible on both connected LRSs.
 - Review displayed only once in the reviews list.
 
+Test scenario 2 : Validated
+
 #### Test scenario 3
 
-**mmegauss (persona 1) submits a metadata edit proposal:**
+mmegauss (persona 1) submits a metadata edit proposal:
 - Learning Object: [https://www.youtube.com/watch?v=daM8YfBTNAg](https://www.youtube.com/watch?v=daM8YfBTNAg)
 - Proposal:
   - Change type to podcast.
@@ -689,14 +735,16 @@ Using the personas, user stories, user flow, and data flow from the Wiki LOM use
   - License: [https://www.gnu.org/licenses/quick-guide-gplv3.en.html](https://www.gnu.org/licenses/quick-guide-gplv3.en.html)
   - Provider: Youtube
 
-**Validation:**
+Validation:
 - Proposal visible on LRS.
 - Displayed in "Suggested Edits" section in the "information" extension.
 
+Test scenario 3 : Validated
+
 #### Test scenario 4
 
-**mcgonagall (persona 2) submits a metadata proposal:**
-- Learning Object: Quelle différence entre l'anglais américain et britannique ? Quel accent choisir : UK ou US ?
+mcgonagall (persona 2) submits a metadata proposal:
+- Learning Object: [Quelle différence entre l'anglais américain et britannique ? Quel accent choisir : UK ou US ?](https://www.youtube.com/watch?v=GXaPlHQQvlg)
 - Proposal:
   - Type: Video
   - Bloom: understand
@@ -705,13 +753,15 @@ Using the personas, user stories, user flow, and data flow from the Wiki LOM use
   - Language: French
   - Keywords: 'BritishVsAmerican'
 
-**Validation:**
+Validation:
 - Proposal visible on both connected LRSs.
 - Displayed only once in "Suggested Edits" section.
 
+Test scenario 4 : Validated
+
 #### Test scenario 5
 
-**The authority (Persona 3) posts metadata edit directly in the LRS:**
+The authority (Persona 3) posts metadata edit directly in the LRS:
 - Learning Object: What caused the French Revolution? - Tom Mullaney
 - Posts 2 statements:
   1.On March 5 
@@ -732,14 +782,16 @@ Using the personas, user stories, user flow, and data flow from the Wiki LOM use
      - Provider: Youtube
      - Language: English
 
-**Validation:**
+Validation:
 - Statements visible on authority's LRS.
 - Only the statement published on March 5 displayed in "information" section.
 
+Test scenario 5 : Validated
+
 #### Test scenario 6
 
-**mmegauss (persona 1) writes 2 reviews on the same learning object:**
-- Learning Object: Langage Langue Parole (selon De Saussure) - Ma Langue dans Ta Poche #1
+mmegauss (persona 1) writes 2 reviews on the same learning object:
+- Learning Object: [Langage Langue Parole (selon De Saussure) - Ma Langue dans Ta Poche #1](https://www.youtube.com/watch?v=Y3EoAizjvtc)
 - Previous review:
   - Date: 07-12-2017
   - Rating: 3/5
@@ -749,13 +801,15 @@ Using the personas, user stories, user flow, and data flow from the Wiki LOM use
   - Rating: 4/5
   - Comment: “C'est une vidéo dynamique pour introduire la pensée de Saussure aux étudiants de licence.”
 
-**Validation:**
+Validation:
 - Both statements visible on LRS.
 - Only the newest review displayed in reviews list.
 
+Test scenario 6 : Validated
+
 #### Test scenario 7
 
-**mcgonagall (persona 2) writes 2 reviews on the same learning object:**
+mcgonagall (persona 2) writes 2 reviews on the same learning object:
 - Learning Object: [https://hbr.org/2016/05/embracing-agile](https://hbr.org/2016/05/embracing-agile)
 - Previous review:
   - Date: 01-04-2022
@@ -766,13 +820,15 @@ Using the personas, user stories, user flow, and data flow from the Wiki LOM use
   - Rating: 4/5
   - Comment: “The article is still useful, but it needs an update.”
 
-**Validation:**
+Validation:
 - All statements visible on both connected LRSs.
 - Only the newest review displayed in the reviews list.
 
+Test scenario 7 : Validated
+
 #### Test scenario 8
 
-**mmegauss (persona 1) submits several metadata edit proposals:**
+mmegauss (persona 1) submits several metadata edit proposals:
 - Learning Object: [https://en.wikipedia.org/wiki/President_of_the_United_States](https://en.wikipedia.org/wiki/President_of_the_United_States)
 - Proposals:
   1. Change type to podcast.
@@ -783,9 +839,11 @@ Using the personas, user stories, user flow, and data flow from the Wiki LOM use
      - Title: President of the united States
      - Provider: Wikipedia
 
-**Validation:**
+Validation:
 - Both statements visible on LRS.
 - Displayed statements in "Suggested edits" section chronologically.
+
+Test scenario 8 : Validated
 
 
 ### UX/UI test 

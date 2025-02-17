@@ -66,3 +66,13 @@ sequenceDiagram
    LOMCT->>LRS_organization: Send trace
    LOMCT->>LRS_orchestrator: Send trace
 ```
+
+## Unit testing
+### Setup test environment
+### Run tests
+### Expected results
+
+## Component-level testing
+### Setup test environment
+### Run tests
+### Expected results

@@ -3,7 +3,8 @@
 
 
 
-1. First of all, you need to [download the extension](https://drive.google.com/drive/folders/1xfBXIinA-ddwNfARTaOnygxUJXggEAnO) by requesting access to the following Drive folder
+1. First of all, you need to [download the extension](https://drive.google.com/file/d/1FfqlWgWrcTuqBDn19I38OXW6iXhc-6bJ/view?usp=sharing) by requesting access to the following Drive folder.
+
 
 2. Once access is granted, you have to click on the 'Manage Extensions' button. Then, click on 'Load Unpacked' as shown in the image.
 ![install a](https://github.com/user-attachments/assets/728e5906-2f39-4dd5-b07c-0e8273381c44)

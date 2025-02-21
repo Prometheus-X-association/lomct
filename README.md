@@ -67,12 +67,73 @@ sequenceDiagram
    LOMCT->>LRS_orchestrator: Send trace
 ```
 
-## Unit testing
-### Setup test environment
-### Run tests
-### Expected results
+## Testing
 
-## Component-level testing
+The current test suite provides good coverage of the extension's core functionality.
+All API interactions are verified to use the correct authentication tokens and xAPI statement structure.
+The UI components and form validation are thoroughly tested across all screens.
+
 ### Setup test environment
+
+This project uses Playwright for end-to-end testing.
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+Playwright and its browsers are installed as part of the dependencies.
+
+2. Copy the example environment file and configure your extension path:
+
+```bash
+cp .env.example .env
+```
+
+3. Then edit the .env file to set EXTENSION_PATH to the absolute path of your Chrome extension directory (the directory
+   containing the manifest.json file).
+   Example:
+
+```
+EXTENSION_PATH=/Users/username/projects/lomct-extension/
+```
+
 ### Run tests
-### Expected results
+
+Run all tests with:
+
+```bash
+npx playwright test
+```
+
+This will show the test results directly in your terminal.
+
+### Test Summary
+
+The test suite verifies the following functionality:
+
+#### Configuration Form
+
+- Form validation for required fields
+- Input validation (email format, URL format, token length)
+- Successful API integration with LRS
+
+#### Dual Blocs Screen
+
+- Search form validation
+- Information and reviews display
+- Data parsing and formatting
+
+#### Suggest Edits Form
+
+- Field validation
+- Form submission
+- Integration with LRS API
+
+#### Add Review Form
+
+- Star rating functionality
+- Comment validation
+- Form submission
+- Integration with LRS API

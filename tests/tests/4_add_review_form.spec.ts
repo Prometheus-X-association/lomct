@@ -110,7 +110,7 @@ test.describe("LOMCT Add review form", () => {
         await expect(request.method()).toBe("POST");
 
         // Check headers
-        checkHeaders(request);
+        await checkHeaders(request);
 
         // Check confirmation screen
         await expect(page.locator("h1")).toBeVisible();

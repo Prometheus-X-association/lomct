@@ -1,6 +1,6 @@
 import {expect} from "../fixtures";
 import {DEFAULT_USER_DATA, EXPECTED_API_HEADERS} from "./setup";
-import {Page} from "playwright-core";
+import {Page, Request} from "playwright-core";
 
 export async function mockApi(page: Page, endpoint: string, body) {
     await page.route(endpoint, async (route) => {

@@ -158,7 +158,7 @@ test.describe("LOMCT Suggest edits form", () => {
         await expect(request.method()).toBe("POST");
 
         // Check headers
-        checkHeaders(request);
+        await checkHeaders(request);
 
         // Check confirmation screen
         await expect(page.locator("h1")).toBeVisible();

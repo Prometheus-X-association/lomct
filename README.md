@@ -20,7 +20,7 @@ Before installing the LOMCT extension, ensure you have:
 1. Download the latest release
 2. Get into developer mode with Chrome extension management
 3. Click on 'Load Unpacked'
-4. Select the `src` folder
+4. Select the `release` folder
 5. You can pin the extension (or not)
 
 ### Configuration
@@ -137,3 +137,49 @@ The test suite verifies the following functionality:
 - Comment validation
 - Form submission
 - Integration with LRS API
+
+## Building
+
+A pre-built version of the extension is available in the `release` directory. You can use this version directly without
+building the project yourself.
+
+### Building from source
+
+The extension uses Turbo for build orchestration.
+All packages are managed through pnpm workspaces.
+If you want to build the extension yourself, follow these instructions.
+
+#### Prerequisites
+
+- Node.js (recommended version in .nvmrc)
+- pnpm (package manager)
+
+#### Installation
+
+1. Install pnpm if not already installed:
+
+   ```bash
+   npm install -g pnpm
+   ```
+2. Install dependencies:
+
+   ```bash
+   pnpm install
+   ```
+
+3. Set up Husky hooks:
+   ```bash
+   pnpm run prepare
+   ```
+
+#### Development Build
+
+To build the extension for development:
+
+   ```bash
+   pnpm build
+   ```
+
+This will build all packages, including content and background script, popup interface, options page, shared utilities,
+etc.
+The built extension will be available in the `dist` directory in the root of the project.

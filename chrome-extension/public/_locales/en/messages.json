@@ -1,0 +1,10 @@
+{
+  "extensionDescription": {
+    "description": "Extension description",
+    "message": "Learning Object Metadata Crowd Tagging (LOMCT) is a browser extension that allows individuals to collaboratively tag and review digital learning resources like videos, courses, and documents. This enhances their discoverability by adding keywords, descriptions, and reviews. It enables multiple users to submit review and metadata edit proposals in xAPI format, which are then stored in the LRS. This service is particularly useful for organizations seeking to collect and manage feedback from teachers and course designers"
+  },
+  "extensionName": {
+    "description": "Extension name",
+    "message": "LOMCT"
+  }
+}

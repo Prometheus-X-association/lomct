@@ -1,0 +1,21 @@
+.information-card-subtracted {
+  margin-top: -25px;
+  padding: 40px 24px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.information-card-subtracted:after {
+  content: '';
+  position: absolute;
+  top: -23px;
+  left: 20px;
+  border-radius: 0.75rem;
+  width: 488px;
+  height: 52px;
+  box-shadow: 0px 0px 0px 2000px white;
+}
+
+.information-card-subtracted > * {
+  z-index: 10;
+}

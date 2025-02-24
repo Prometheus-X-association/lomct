@@ -1,0 +1,14 @@
+{
+  "extends": "@chrome-extension-boilerplate/tsconfig/base",
+  "compilerOptions": {
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@src/*": ["src/*"]
+    },
+    "jsx": "react-jsx",
+    "types": ["chrome"]
+  },
+  "include": ["src"]
+}

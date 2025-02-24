@@ -1,0 +1,51 @@
+{
+  "name": "@chrome-extension-boilerplate/popup",
+  "version": "0.0.1",
+  "description": "chrome extension popup",
+  "private": true,
+  "sideEffects": true,
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "clean": "rimraf ./dist",
+    "build": "pnpm run clean && vite build",
+    "build:watch": "cross-env __DEV__=true vite build -w --mode development",
+    "dev": "pnpm build:watch",
+    "lint": "eslint . --ext .ts,.tsx",
+    "lint:fix": "pnpm lint --fix",
+    "prettier": "prettier . --write --ignore-path ../../.prettierignore",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@chrome-extension-boilerplate/shared": "workspace:*",
+    "@chrome-extension-boilerplate/storage": "workspace:*",
+    "@hookform/resolvers": "^3.9.0",
+    "@radix-ui/react-checkbox": "^1.1.1",
+    "@radix-ui/react-label": "^2.1.0",
+    "@radix-ui/react-popover": "^1.1.1",
+    "@radix-ui/react-scroll-area": "^1.1.0",
+    "@radix-ui/react-select": "^2.1.1",
+    "@radix-ui/react-separator": "^1.1.0",
+    "@radix-ui/react-slot": "^1.1.0",
+    "@radix-ui/react-tooltip": "^1.1.2",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "date-fns": "^3.6.0",
+    "lucide-react": "^0.408.0",
+    "react-day-picker": "8.10.1",
+    "react-hook-form": "^7.52.1",
+    "react-router-dom": "^6.25.1",
+    "react-simple-star-rating": "^5.1.7",
+    "tailwind-merge": "^2.4.0",
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.23.8",
+    "zustand": "^4.5.5"
+  },
+  "devDependencies": {
+    "@chrome-extension-boilerplate/hmr": "workspace:*",
+    "@chrome-extension-boilerplate/tailwindcss-config": "workspace:*",
+    "@chrome-extension-boilerplate/tsconfig": "workspace:*",
+    "tailwind-scrollbar": "^3.1.0"
+  }
+}

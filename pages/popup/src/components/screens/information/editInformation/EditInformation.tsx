@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -46,7 +46,6 @@ import FormSection from './FormSection';
 import EditInfoSuccess from './EditInfoSuccess';
 import { useStatementsStore } from '@/store/store';
 import { RFC5646_LANGUAGE_TAGS } from '@/const/languageTags';
-import { useState } from 'react';
 import { useStorageSuspense } from '@chrome-extension-boilerplate/shared';
 import { userDataStorage, suggestEditDataStorage } from '@chrome-extension-boilerplate/storage';
 

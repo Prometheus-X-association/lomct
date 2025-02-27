@@ -15,6 +15,17 @@ Before installing the LOMCT extension, ensure you have:
 - A Learning Record Store (LRS) endpoint URL
 - A basic auth url for your LRS
 
+#### Don't have an LRS ?
+If you don't have an LRS, you can deploy Docker [LRSC](https://github.com/inokufu/lrsc), which deploys an LRS (Leaning Locker), a PDC and a connector between the two. 
+
+If you don't have an LRS and don't want to deploy it, you can directly add the LRS of Inokufu in the primary source link :
+- Configure the primary source link : https://lrs.dataspace.inokufu.com/data/xAPI
+- Configure the primary source basic auth : NzkxMjlhNzRmNjUyZmI0NmU0NTA5Y2Y5MTdkMmY0ZWU1YjkxYjZkYTo4YWU0MGNhNjJjMmM4NTE4YzZjMzAwZDBhNGI4OTE4YTI0M2I1YjRl
+
+For the secondary source link you can add this LRS :
+- Configure the secondary source link : https://lrs.dataspace.inokufu.com/data/xAPI
+- Configure the secondary source basic auth : Njk2NjM2MGVhYzYxYTQxN2MxOGMyMTA0MjgxZmMzYmNkNGMyZmQ2MDpiN2NkNDgyNzdmNjBhMWFjODc3MjEzMWYxNmI3ODU5ZjE5NWI1MTVh
+
 ### Running instructions
 
 1. Download the latest release

@@ -88,9 +88,10 @@ The UI components and form validation are thoroughly tested across all screens.
 
 This project uses Playwright for end-to-end testing.
 
-1. Install dependencies:
+1. Go to the `tests` directory and install dependencies:
 
 ```bash
+cd tests;
 npm install
 ```
 
@@ -148,6 +149,14 @@ The test suite verifies the following functionality:
 - Comment validation
 - Form submission
 - Integration with LRS API
+
+#### Security Tests
+
+Ensure that the extension correctly sanitises data from the LRS API before displaying it.
+
+- Protection against XSS (Cross-Site Scripting) attacks (script tag injection, javascript: protocol exploitation, HTML
+  attributes with event handlers)
+- Protection against CSS injections (style-based JavaScript execution, malicious background-image URLs with JavaScript)
 
 ## Building
 

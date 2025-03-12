@@ -80,7 +80,7 @@ sequenceDiagram
 
 ## Testing
 
-The current test suite provides good coverage of the extension's core functionality.
+The current [test suite](tests/tests) provides good coverage of the extension's core functionality.
 All API interactions are verified to use the correct authentication tokens and xAPI statement structure.
 The UI components and form validation are thoroughly tested across all screens.
 
@@ -103,12 +103,14 @@ Playwright and its browsers are installed as part of the dependencies.
 cp .env.example .env
 ```
 
-3. Then edit the .env file to set EXTENSION_PATH to the absolute path of your Chrome extension directory (the directory
-   containing the manifest.json file).
+3. Then edit the .env file to set EXTENSION_PATH to the absolute path of your Chrome extension directory
+   (the directory containing the manifest.json file, for example `release` for the pre-built version, or `dist` if
+   you've built it yourself).
+
    Example:
 
 ```
-EXTENSION_PATH=/Users/username/projects/lomct-extension/
+EXTENSION_PATH=/Users/username/projects/lomct-extension/release
 ```
 
 ### Run tests

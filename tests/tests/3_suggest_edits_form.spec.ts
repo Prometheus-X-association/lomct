@@ -88,8 +88,8 @@ test.describe("LOMCT Suggest edits form", () => {
 
     test.beforeEach(async ({context, page, extensionId}) => {
         await setupStorage(context);
-        await goToExtensionPopup(page, extensionId);
         await setupApiMock(page);
+        await goToExtensionPopup(page, extensionId);
 
         // Click on the "Suggest edits" button to go to the form
         const editButton = await page.locator(SELECTORS.editButton);

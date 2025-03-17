@@ -57,8 +57,8 @@ test.describe("LOMCT Dual blocs screen", () => {
     test.beforeEach(async ({context, page, extensionId}) => {
         // Before testing this screen, we need to put data in the extension storage and mock the API
         await setupStorage(context);
-        await goToExtensionPopup(page, extensionId);
         await setupApiMock(page);
+        await goToExtensionPopup(page, extensionId);
         await page.waitForSelector(SELECTORS.searchInput);
     });
 

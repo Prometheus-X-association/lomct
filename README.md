@@ -91,7 +91,8 @@ This project uses Playwright for end-to-end testing.
 1. Install dependencies:
 
 ```bash
-npm install
+npm install;
+npx playwright install;
 ```
 
 Playwright and its browsers are installed as part of the dependencies.

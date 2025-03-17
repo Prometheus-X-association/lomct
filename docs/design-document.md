@@ -597,6 +597,7 @@ Summary of test :
 - Validate requirements and potential risks
 - Testing independent features
 - Playwright test
+- OWASP test
 - Manual Usage Scenario
 - UX/UI test
 
@@ -679,49 +680,57 @@ Here are the tests carried out ([go here for technical details](https://github.c
 In all screens :
  - API calls to the LRS are made with the token entered in the first configuration screen and “x-experience-api-version”: “1.0.3”.
    
-Screen 1 (configuration form):
- - Welcome” title is present
- - fields name, actorEmail, primarySourceLink, primarySourceBasicAuth, biography are present
- - fields name, actorEmail, primarySourceLink, primarySourceBasicAuth are marked as mandatory
- - Checkbox present and checked
- - 2 buttons next to the fields primarySourceLink, primarySourceBasicAuth
- - If the form is validated, the mandatory fields should generate errors
- - An email must be entered in the actorEmail field, otherwise it will be marked as invalid
- - A URL must be entered in the primarySourceLink field, otherwise it will be marked as invalid.
- - A 108-character string must be entered in the primarySourceBasicAuth field, otherwise it will be marked as invalid.
- - The checkbox must be checked, otherwise it is marked as invalid
- - If correct values are entered in the fields, a GET API call to primarySourceLink/statements?limit=1 is performed. The API response should be an array of statements.
+[Screen 1 (configuration form):](https://github.com/Prometheus-X-association/lomct/blob/main/tests/tests/1_configuration_form.spec.ts )
+ - Welcome” title is present. **test : "should display the welcome header correctly"** 
+ - fields name, actorEmail, primarySourceLink, primarySourceBasicAuth, biography are present. **test "should display form structure correctly"**
+ - fields name, actorEmail, primarySourceLink, primarySourceBasicAuth are marked as mandatory. **test "should display form structure correctly"**
+ - Checkbox present and checked. **test "should display form structure correctly"**
+ - 2 buttons next to the fields primarySourceLink, primarySourceBasicAuth. **test "should have info buttons"**
+ - If the form is validated, the mandatory fields should generate errors. **test "should show validation errors on empty form submission"**
+ - An email must be entered in the actorEmail field, otherwise it will be marked as invalid. **test "should validate fields and show error states"**
+ - A URL must be entered in the primarySourceLink field, otherwise it will be marked as invalid. **test "should validate fields and show error states"**
+ - A 108-character string must be entered in the primarySourceBasicAuth field, otherwise it will be marked as invalid. **test "should validate fields and show error states"**
+ - The checkbox must be checked, otherwise it is marked as invalid **test "should validate fields and show error states"**
+ - If correct values are entered in the fields, a GET API call to primarySourceLink/statements?limit=1 is performed. The API response should be an array of statements. **test "should validate form submission without errors" and test "should handle successful API response"**
 
-Screen 2 (2 blocks):
- - URL input field and button present
- - A URL must be entered in the field, otherwise it is marked as invalid.
- - The 2 blocks with an h3, a button and an image are displayed
- - An API GET call is made to obtain the block statements, with the “activity” parameter representing what was entered in the field.
- - The data received by the API (title, bloom, level, author, keywords, date, etc.) must be displayed.
- - Timestamps must be correctly displayed
- - Average score calculation correct
+[Screen 2 (2 blocks):](https://github.com/Prometheus-X-association/lomct/blob/main/tests/tests/2_dual_blocs_screen.spec.ts )
+ - URL input field and button present. **test "should display search form"**
+ - A URL must be entered in the field, otherwise it is marked as invalid. **test "should validate search input"**
+ - The 2 blocks with an h3, a button and an image are displayed. **test "should display information card" and "should display reviews section"**
+ - An API GET call is made to obtain the block statements, with the “activity” parameter representing what was entered in the field. **test "should display edit section with data"**
+ - The data received by the API (title, bloom, level, author, keywords, date, etc.) must be displayed. **test "should display edit section with data" and "should display review section with data"**
+ - Timestamps must be correctly displayed. **test "should display edit section with data" and "should display review section with data"**
+ - Average score calculation correct. **test "should display review section with data"**
 
-Screen 3 (Suggest edits)
- - Clicking on the first button (Suggest edits) takes you to this screen
- - The “Back” button is present, and clicking on it takes you back to the 2-block screen.
- - Fields title, license, keywords, hours, minutes, seconds, provider, author, publisher, description, bloom, level, type, language are present
- - You must enter a text of less than 300 characters in the title field.
- - A URL must be entered in the license field
- - An integer >= 1 must be entered in the hours field
- - An integer >= 1 and =< 59 must be entered in the minutes field
- - Enter an integer >= 1 and =< 59 in the seconds field
- - If correct values are entered in the fields, a POST API call to primarySourceLink/statements? is made. The API response must be a uuid.
- - After the API call, a screen is displayed with a “Success” h3, and an “OK” button which should lead to the 2-block screen.
+[Screen 3 (Suggest edits)](https://github.com/Prometheus-X-association/lomct/blob/main/tests/tests/3_suggest_edits_form.spec.ts )
+ - Clicking on the first button (Suggest edits) takes you to this screen. **test "LOMCT Suggest edits form"**
+ - The “Back” button is present, and clicking on it takes you back to the 2-block screen. **test "should the Back button works correctly"**
+ - Fields title, license, keywords, hours, minutes, seconds, provider, author, publisher, description, bloom, level, type, language are present. **test "should display edit form fields"**
+ - You must enter a text of less than 300 characters in the title field. **test "should handle invalid values correctly"**
+ - A URL must be entered in the license field. **test "should accept valid field values"**
+ - An integer >= 1 must be entered in the hours field. **test "should accept valid field values"**
+ - An integer >= 1 and =< 59 must be entered in the minutes field. **test "should accept valid field values"**
+ - Enter an integer >= 1 and =< 59 in the seconds field. **test "should accept valid field values"**
+ - If correct values are entered in the fields, a POST API call to primarySourceLink/statements? is made. The API response must be a uuid. **test "should handle successful API response"**
+ - After the API call, a screen is displayed with a “Success” h3, and an “OK” button which should lead to the 2-block screen. **test "should handle successful API response"**
 
-Screen 4 (Add review)
- - Clicking on the first button (Add review) takes you to this screen
- - The “Back” button is present, and clicking on it takes you back to the 2-block screen.
- - The validation button is disabled as long as the comment field is empty (this doesn't work the same way on other forms).
- - There are 5 stars
- - The comment field is marked as mandatory
- - If the form is validated, the mandatory field should generate errors 
- - If correct values are entered in the fields, a POST API call is made to primarySourceLink/statements?. The API response must be a uuid.
- - After the API call, a screen is displayed with a “Success” h3, and an “OK” button that should lead to the 2-block screen.
+[Screen 4 (Add review)](https://github.com/Prometheus-X-association/lomct/blob/main/tests/tests/4_add_review_form.spec.ts )
+ - Clicking on the first button (Add review) takes you to this screen. **test "LOMCT Add review form"**
+ - The “Back” button is present, and clicking on it takes you back to the 2-block screen. **test "should the Back button works correctly"**
+ - The validation button is disabled as long as the comment field is empty (this doesn't work the same way on other forms). **test "should accept valid field values"**
+ - There are 5 stars. **test "should display review form fields"**
+ - The comment field is marked as mandatory. **test "should display review form fields"**
+ - If the form is validated, the mandatory field should generate errors. **test "should accept valid field values"**
+ - If correct values are entered in the fields, a POST API call is made to primarySourceLink/statements?. The API response must be a uuid. **test "should handle successful API response""**
+ - After the API call, a screen is displayed with a “Success” h3, and an “OK” button that should lead to the 2-block screen. **test "should handle successful API response"**
+
+### OWASP test
+[OWASP test](https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/11-Client-side_Testing/) identify whether malicious users can cause problems in the data space using various injection or similar attacks. We have carried out these tests and found no errors:
+- XSS ([Cross-Site Scripting](https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/11-Client-side_Testing/01-Testing_for_DOM-based_Cross_Site_Scripting)) 
+- [CSS Injection](https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/11-Client-side_Testing/05-Testing_for_CSS_Injection)
+
+[Here are the tests](https://github.com/Prometheus-X-association/lomct/blob/main/tests/tests/5_security_tests.spec.ts )
+
 
 ### Manual Usage Scenario
 

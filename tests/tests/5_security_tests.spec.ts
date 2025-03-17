@@ -66,8 +66,8 @@ test.describe("LOMCT Security Tests (OWASP)", () => {
 
     test.beforeEach(async ({context, page, extensionId}) => {
         await setupStorage(context);
-        await goToExtensionPopup(page, extensionId);
         await setupApiMock(page);
+        await goToExtensionPopup(page, extensionId);
         await page.waitForSelector(SELECTORS.searchInput);
 
         // Alert detection

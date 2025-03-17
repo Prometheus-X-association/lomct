@@ -30,8 +30,8 @@ test.describe("LOMCT Add review form", () => {
 
     test.beforeEach(async ({context, page, extensionId}) => {
         await setupStorage(context);
-        await goToExtensionPopup(page, extensionId);
         await setupApiMock(page);
+        await goToExtensionPopup(page, extensionId);
 
         // Click on the "Add review" button to go to the form
         const addReviewButton = page.getByRole("button", {name: ADD_REVIEW_TEXT});

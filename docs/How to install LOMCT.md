@@ -3,7 +3,7 @@
 
 
 
-1. First of all, you need to [download the extension](https://drive.google.com/file/d/1FfqlWgWrcTuqBDn19I38OXW6iXhc-6bJ/view?usp=sharing) by requesting access to the following Drive folder.
+1. First of all, you need to [download the zip of this github](https://github.com/Prometheus-X-association/lomct/archive/refs/heads/main.zip).
 
 
 2. Once access is granted, you have to click on the 'Manage Extensions' button. Then, click on 'Load Unpacked' as shown in the image.
@@ -24,7 +24,8 @@ By clicking on 'Options,' we can access the options page.
 
 When we are on the options page, we can add the secondary source along with its key, as shown in the image.
 
-![install f](https://github.com/user-attachments/assets/0c145562-5856-423d-96df-1ac97f13f017)
+![1](https://github.com/user-attachments/assets/e6dd688a-354b-4d8c-9a0d-5bb48ebaa090)
+
 
 ## What are the functionalities offered by the extension?
 Through its popup, we can write reviews about a certain learning object, such as a YouTube video. The reviews will be displayed chronologically.

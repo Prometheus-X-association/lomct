@@ -567,28 +567,15 @@ Before installing the LOMCT extension, ensure you have:
 5. You can pin the extension (or not)
 
 ### Configuration
-1. Open the extension and fill in the required fields:
+Open the extension and fill in the required fields:
     - username
     - e-mail address
     - biography (this can be your job or profession)
     - endpoint of your LRS
     - basic auth of you LRS
-2. Add a secondary source managed by Inokufu (content shared in Prometheus-X and moderated)
-    - Navigate to `options` of the extension
-    - Activate the secondary source
-    - Configure the secondary source link : https://lrs.dataspace.inokufu.com/data/xAPI
-    - Configure the secondary source basic auth : NzkxMjlhNzRmNjUyZmI0NmU0NTA5Y2Y5MTdkMmY0ZWU1YjkxYjZkYTo4YWU0MGNhNjJjMmM4NTE4YzZjMzAwZDBhNGI4OTE4YTI0M2I1YjRl 
 
 ### Don't have an LRS ?
 If you don't have an LRS, you can deploy Docker [LRSC](https://github.com/inokufu/lrsc), which deploys an LRS (Leaning Locker), a PDC and a connector between the two. 
-
-If you don't have an LRS and don't want to deploy it, you can directly add the LRS of Inokufu in the primary source link :
-- Configure the primary source link : https://lrs.dataspace.inokufu.com/data/xAPI
-- Configure the primary source basic auth : NzkxMjlhNzRmNjUyZmI0NmU0NTA5Y2Y5MTdkMmY0ZWU1YjkxYjZkYTo4YWU0MGNhNjJjMmM4NTE4YzZjMzAwZDBhNGI4OTE4YTI0M2I1YjRl
-
-For the secondary source link you can add this LRS :
-- Configure the secondary source link : https://lrs.dataspace.inokufu.com/data/xAPI
-- Configure the secondary source basic auth : Njk2NjM2MGVhYzYxYTQxN2MxOGMyMTA0MjgxZmMzYmNkNGMyZmQ2MDpiN2NkNDgyNzdmNjBhMWFjODc3MjEzMWYxNmI3ODU5ZjE5NWI1MTVh
 
 ## Test
 The LOMCT testing strategy will focus on ensuring the accuracy, reliability, and performance of its functionality. We will use a combination of unit testing, integration testing, and user interface testing. The test environment will reproduce conditions similar to those in production in order to accurately validate BB behavior. Acceptance criteria will be defined based on user stories, functional requirements, and performance criteria.
@@ -741,8 +728,7 @@ First time install with 1 LRS
 - Onboarding:
   - Enter username: "mmegauss"
   - Write bio: "Professeur de linguistique au M2 Sciences Po Paris"
-  - Connect the primary source link : https://lrs.dataspace.inokufu.com/data/xAPI
-  - Configure the secondary source basic auth : NzkxMjlhNzRmNjUyZmI0NmU0NTA5Y2Y5MTdkMmY0ZWU1YjkxYjZkYTo4YWU0MGNhNjJjMmM4NTE4YzZjMzAwZDBhNGI4OTE4YTI0M2I1YjRl 
+  - Connect the primary source link 
   - Accept the checkbox for visibility of username and biography.
 
 Validation:
@@ -753,17 +739,15 @@ First time install with 2 LRSs
 - Onboarding:
   - Enter username: "mcgonagall"
   - Write bio: "Management professor at Cambridge University"
-  - Connect the primary source link : https://lrs.dataspace.inokufu.com/data/xAPI
-  - Configure the primary source basic auth : NzkxMjlhNzRmNjUyZmI0NmU0NTA5Y2Y5MTdkMmY0ZWU1YjkxYjZkYTo4YWU0MGNhNjJjMmM4NTE4YzZjMzAwZDBhNGI4OTE4YTI0M2I1YjRl 
+  - Connect the primary source link 
   - Accept the checkbox for visibility of username and biography.
   - Continue to settings extension page.
-  - Connect the secondary source link : https://lrs.dataspace.inokufu.com/data/xAPI
-  - Configure the secondary source basic auth : Njk2NjM2MGVhYzYxYTQxN2MxOGMyMTA0MjgxZmMzYmNkNGMyZmQ2MDpiN2NkNDgyNzdmNjBhMWFjODc3MjEzMWYxNmI3ODU5ZjE5NWI1MTVh
+  - Connect the secondary source link 
 
 Validation:
 - Account creation with locally stored information.
 
-#### Persona 3: the authority of LRS: "https://lrs.dataspace.inokufu.com/data/xAPIx"
+#### Persona 3: the authority of primary LRS
 
 #### Test scenario 1
 

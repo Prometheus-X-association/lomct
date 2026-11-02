@@ -24,8 +24,8 @@ export type FormTestConfig = {
 
 export class FormTester {
     constructor(
-        private form: Locator,
-        private config: FormTestConfig
+        private readonly form: Locator,
+        private readonly config: FormTestConfig
     ) {
     }
 

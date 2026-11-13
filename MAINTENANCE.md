@@ -5,7 +5,7 @@
 - **Project:** Web Analytics Learning Records Universal Connector
 - **Programme:** Prometheus-X
 - **Maintainer organisation:** Inokufu
-- **Repository:** https://github.com/Prometheus-X-association/lrs-gateway
+- **Repository:** https://github.com/Prometheus-X-association/lomct
 
 ## Maintainers
 
